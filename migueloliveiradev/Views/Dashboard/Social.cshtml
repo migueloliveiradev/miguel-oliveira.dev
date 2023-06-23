@@ -1,0 +1,48 @@
+﻿@using migueloliveiradev.Models.Network;
+@model List<RedeSocial>
+@{
+    Layout = "_LayoutDashboard";
+}
+<div class="p-3">
+    <table class="table">
+        <thead>
+            <tr>
+                <th scope="col"></th>
+                <th scope="col">Nome</th>
+                <th scope="col">Url</th>
+                <th scope="col">Class Icon</th>
+                <th scope="col">Opções</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (RedeSocial rede in Model)
+            {
+                <tr>
+                    <th><i class="w-25 h-25 @rede.Icon"></i></th>
+                    <td>@rede.Nome</td>
+                    <td>@rede.Url</td>
+                    <td>@rede.Icon</td>
+                    <td>
+                        <button type="button" class="btn">Editar</button>
+                        <a class="btn" asp-page-handler="Delete">Excluir</a>
+                    </td>
+                </tr>
+            }
+            @if (!Model.Any())
+            {
+                <tr>
+                    <th colspan="5">Nenhuma rede social cadastrada.</th>
+                    
+                </tr>
+            }
+
+        </tbody>
+    </table>
+</div>
+<div class="position-absolute top-3 end-0 m-3">
+<button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#exampleModal">
+    Adicionar
+</button>
+</div>
+<partial name="Components\Dashboard\Social\Add.cshtml" model="null" />
+

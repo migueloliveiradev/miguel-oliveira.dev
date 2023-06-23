@@ -1,0 +1,34 @@
+﻿@using migueloliveiradev.Models;
+@model Usuario
+@{
+    Layout = null;
+}
+<!DOCTYPE html>
+<html lang="pt">
+<head>
+    <title>Dashboard</title>
+    <link rel="stylesheet" href="~/lib/bootstrap/css/bootstrap.min.css" />
+    <link rel="stylesheet" href="~/css/dashboard/login.css" />
+</head>
+<body>
+
+    <div class="container" style="height: 100vh">
+        <main role="main" id="main" class="pb-3">
+            <div class="login-box">
+                <h2>Login</h2>
+                <form asp-action="Login" asp-controller="Dashboard" method="post">
+                    <div class="user-box">
+                        <input type="text" asp-for="Username" required>
+                        <label>Username</label>
+                    </div>
+                    <div class="user-box">
+                        <input type="password" asp-for="Senha" required>
+                        <label>Password</label>
+                    </div>
+                    <button type="submit" class="btn btn-success">Entrar</button>
+                </form>
+            </div>
+        </main>
+    </div>
+</body>
+</html>

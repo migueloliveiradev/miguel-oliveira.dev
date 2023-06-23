@@ -1,0 +1,49 @@
+﻿@using migueloliveiradev.Models.Works.Projetos;
+@model Projeto
+
+<div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-xl">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h1 class="modal-title fs-5" id="exampleModalLabel">Novo Projeto</h1>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <form asp-action="Create" asp-controller="Projeto">
+                <div class="modal-body">
+
+                    <div class="form-floating mb-3">
+                        <input asp-for="Titulo" class="form-control" placeholder="Escreva o titulo do projeto" id="input-title"></input>
+                        <label for="input-title">Titulo</label>
+                    </div>
+                    <div class="form-floating mb-3">
+                        <input asp-for="SubTitulo" class="form-control" placeholder="Escreva o subtitulo do projeto" id="input-subject"></input>
+                        <label for="input-subject">Subtitulo</label>
+                    </div>
+                    <div class="form-floating mb-3">
+                        <textarea asp-for="Descricao" class="form-control" spellcheck="false" placeholder="Escreva a descrição do projeto" id="input-description"></textarea>
+                        <label for="input-description">Descrição</label>
+                    </div>
+                    <div class="form-floating mb-3">
+                        <input asp-for="Url" class="form-control" placeholder="Escreva a url do projeto aqui" id="input-url"></input>
+                        <label for="input-url">Url</label>
+                    </div>
+                    <div class="form-floating mb-3">
+                        <input asp-for="UrlGithub" class="form-control" placeholder="Escreva a url do repositorio github aqui" id="input-url-github"></input>
+                        <label for="input-url-github">Url Github</label>
+                    </div>
+                    <div class="form-floating mb-3">
+                        <input asp-for="UrlLinkedin" class="form-control" placeholder="Escreva a url do post linkedin" id="input-url-linkedin"></input>
+                        <label for="input-url-linkedin">Url Linkedin</label>
+                    </div>
+                </div>
+
+                <div class="modal-footer">
+                    <button type="reset" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                    <button type="submit" class="btn btn-primary">Salvar</button>
+                </div>
+            </form>
+
+
+        </div>
+    </div>
+</div>

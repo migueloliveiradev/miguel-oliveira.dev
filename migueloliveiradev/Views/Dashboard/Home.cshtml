@@ -1,0 +1,32 @@
+﻿
+@{
+    Layout = "_LayoutDashboard";
+}
+<p>testeeeeeeeee</p>
+
+
+<div id="app">
+    <button class="btn btn-success" v-on:click="add">
+        Count is: {{ count }}
+    </button>
+</div>
+
+<script>
+    const { createApp } = Vue
+
+    const app = createApp({
+        data() {
+            return {
+                count: 0
+            }
+        },
+        methods: {
+            add() {
+                this.count++;
+            }
+        }
+        
+    })
+
+    app.mount('#app')
+</script>

@@ -1,0 +1,79 @@
+﻿@using migueloliveiradev.Models.Works.Projetos;
+@model Projeto
+@{
+}
+
+<div class="modal fade" id="modalEditTechnologies" ref="EditTechnologies" data-bs-backdrop="static" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h1 class="modal-title fs-5" id="exampleModalLabel">Tecnologias</h1>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                <div class="d-flex">
+                    <select :disabled="technologies.length == 0" class="form-select" v-model="selected">
+                        <option v-if="technologies.length === 0" value="" selected>Todas tecnologias selecionadas</option>
+                        <option v-for="(tech, index) in technologies">{{ tech }}</option>
+                    </select>
+                    <button class="btn btn-primary mr-3" v-on:click="AddTech()">Adicionar</button>
+                </div>
+                <div>
+                    <a class="btn btn-success mt-3 ms-1" v-for="tech in technologiesSelected">
+                        {{ tech }}
+                    </a>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal" v-on:click="clear()">Close</button>
+                <button type="button" class="btn btn-primary" data-bs-dismiss="modal" v-on:click="salvar()">Salvar</button>
+            </div>
+        </div>
+    </div>
+</div>
+<script>
+    const { createApp } = Vue
+
+    const app = createApp({
+        data() {
+            return {
+                technologies: [
+                    "C#",
+                    "HTML",
+                    "Java",
+                    "PHP"
+                ],
+                technologiesSelected: [],
+                selected: String
+            }
+        },
+        methods: {
+            AddTech() {
+                if(this.selected == null || this.selected == undefined || this.selected == '')
+                    return
+                this.technologies = this.technologies.filter(tech => tech != this.selected)
+                this.technologiesSelected.push(this.selected)
+                this.selected = this.technologies[0] ?? '';
+            },
+            salvar() {
+                //axios post to save technologies in project
+                console.log("salvando...");
+                clear()
+            },
+            clear(){
+                this.technologiesSelected = [];
+                this.technologies = [];
+                this.selected = '';
+            }
+        },
+        mounted() {
+            this.selected = this.technologies[0];
+            const modal = document.getElementById('modalEditTechnologies');
+            modal.addEventListener('show.bs.modal', event => {
+                const button = event.relatedTarget
+                const id = button.getAttribute('data-bs-project-id')
+            });
+        }
+    })
+    app.mount('#modalEditTechnologies')
+</script>

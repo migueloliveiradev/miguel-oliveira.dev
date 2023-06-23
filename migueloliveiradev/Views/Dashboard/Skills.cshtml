@@ -1,0 +1,49 @@
+﻿@using migueloliveiradev.Models.Works;
+@model List<Skill>
+@{
+    Layout = "_LayoutDashboard";
+}
+<div class="p-3">
+    <table class="table">
+        <thead>
+            <tr>
+                <th scope="col"></th>
+                <th scope="col">Nome</th>
+                <th scope="col">Class Icon</th>
+                <th scope="col">Porcentagem</th>
+                <th scope="col">Opções</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (Skill skill in Model)
+            {
+                <tr>
+                    <th><i class="w-25 h-25 @skill.Icon"></i></th>
+                    <td>@skill.Nome</td>
+                    <td>@skill.Icon</td>
+                    <td>
+                        <div class="progress mt-2" role="progressbar" aria-label="Basic example" aria-valuenow="0" aria-valuemin="0" aria-valuemax="100">
+                            <div class="progress-bar" style="width: @skill.Percentage%"></div>
+                        </div>
+                    </td>
+                    <td>
+                        <button type="button" class="btn">Editar</button>
+                        <a class="btn" >Excluir</a>
+                    </td>
+                </tr>
+            }
+            @if (!Model.Any())
+            {
+                <tr>
+                    <th colspan="4">Nenhuma skill adicionada.</th>
+
+                </tr>
+            }
+
+        </tbody>
+    </table>
+</div>
+<div class="position-absolute end-0 me-4">
+    <button type="button" class="btn btn-primary ms-auto" data-bs-toggle="modal" data-bs-target="#exampleModal">Adicionar</button>
+</div>
+<partial name="Components\Dashboard\Skill\Add.cshtml" model="null" />

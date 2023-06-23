@@ -1,0 +1,38 @@
+﻿@using migueloliveiradev.Models.Me;
+@model List<Contact>
+@{
+    Layout = "_LayoutDashboard";
+}
+<link rel="stylesheet" href="~/css/dashboard/cards.css" />
+<div class="cards cards-contact flex-column ">
+    @{
+        for (int i = 0; i < 6; i++)
+        {
+            <div class="card position-relative shadow-sm">
+                <div class="card-body d-flex flex-row">
+                    <div class="flex-grow-1">
+                        <h5 class="card-title">Nome Legal</h5>
+                        <h6 class="card-subtitle mb-2 text-body-secondary">Assunto Legal</h6>
+                        <div>
+                            Mensagem teste bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla 
+                        </div>
+                    </div>
+                    <div class="position-absolute top-0 end-0 m-3">
+                        <div class="d-flex flex-column">
+                            <a href="#" class="btn btn-primary my-1">Visualizar</a>
+                            <a href="#" class="btn btn-primary my-1">Ler</a>
+                            <a href="#" class="btn btn-primary my-1">Responder</a>
+                            <a href="#" class="btn btn-primary my-1">Descartar</a>
+                        </div>
+                    </div>
+                    <div class="position-absolute bottom-0 start-0 m-3">
+                        <p>emaillegal@email.com</p>
+                    </div>
+                    <div class="position-absolute bottom-0 end-0 m-3">
+                        <div>30/03/2023</div>
+                    </div>
+                </div>
+            </div>
+        }
+    }
+</div>
