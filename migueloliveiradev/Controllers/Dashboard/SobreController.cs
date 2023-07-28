@@ -2,24 +2,23 @@
 using migueloliveiradev.Database;
 using migueloliveiradev.Models.Me;
 
-namespace migueloliveiradev.Controllers.Dashboard
+namespace migueloliveiradev.Controllers.Dashboard;
+
+public class SobreController : Controller
 {
-    public class SobreController : Controller
+    private readonly DatabaseContext context = new();
+    public IActionResult AddEdit(About about)
     {
-        private readonly DatabaseContext context = new();
-        public IActionResult AddEdit(About about)
+        if (context.About.Any())
         {
-            if (context.About.Any())
-            {
-                context.About.Update(about);
-                context.SaveChanges();
-            }
-            else
-            {
-                context.About.Add(about);
-                context.SaveChanges();
-            }
-            return RedirectToAction("Sobre", "Dashboard");
+            context.About.Update(about);
+            context.SaveChanges();
         }
+        else
+        {
+            context.About.Add(about);
+            context.SaveChanges();
+        }
+        return RedirectToAction("Sobre", "Dashboard");
     }
 }

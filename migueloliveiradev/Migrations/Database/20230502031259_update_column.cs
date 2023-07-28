@@ -2,37 +2,36 @@
 
 #nullable disable
 
-namespace migueloliveiradev.Migrations.Database
+namespace migueloliveiradev.Migrations.Database;
+
+/// <inheritdoc />
+public partial class update_column : Migration
 {
     /// <inheritdoc />
-    public partial class update_column : Migration
+    protected override void Up(MigrationBuilder migrationBuilder)
     {
-        /// <inheritdoc />
-        protected override void Up(MigrationBuilder migrationBuilder)
-        {
-            migrationBuilder.RenameColumn(
-                name: "ClassFontAwesome",
-                table: "Skills",
-                newName: "Icon");
+        migrationBuilder.RenameColumn(
+            name: "ClassFontAwesome",
+            table: "Skills",
+            newName: "Icon");
 
-            migrationBuilder.RenameColumn(
-                name: "ClassFontAwesome",
-                table: "RedeSociais",
-                newName: "Icon");
-        }
+        migrationBuilder.RenameColumn(
+            name: "ClassFontAwesome",
+            table: "RedeSociais",
+            newName: "Icon");
+    }
 
-        /// <inheritdoc />
-        protected override void Down(MigrationBuilder migrationBuilder)
-        {
-            migrationBuilder.RenameColumn(
-                name: "Icon",
-                table: "Skills",
-                newName: "ClassFontAwesome");
+    /// <inheritdoc />
+    protected override void Down(MigrationBuilder migrationBuilder)
+    {
+        migrationBuilder.RenameColumn(
+            name: "Icon",
+            table: "Skills",
+            newName: "ClassFontAwesome");
 
-            migrationBuilder.RenameColumn(
-                name: "Icon",
-                table: "RedeSociais",
-                newName: "ClassFontAwesome");
-        }
+        migrationBuilder.RenameColumn(
+            name: "Icon",
+            table: "RedeSociais",
+            newName: "ClassFontAwesome");
     }
 }
