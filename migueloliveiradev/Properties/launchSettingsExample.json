@@ -1,0 +1,14 @@
+{
+  "profiles": {
+    "migueloliveiradev": {
+      "commandName": "Project",
+      "launchBrowser": true,
+      "environmentVariables": {
+        "ASPNETCORE_ENVIRONMENT": "Development",
+        "MYSQL_CONNECTION": ""
+      },
+      "dotnetRunMessages": true,
+      "applicationUrl": "https://localhost:7072;http://localhost:5152"
+    }
+  }
+}

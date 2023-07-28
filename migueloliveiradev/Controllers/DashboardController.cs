@@ -15,11 +15,12 @@ namespace migueloliveiradev.Controllers
     public class DashboardController : Controller
     {
         private readonly SignInManager<IdentityUser> signInManager;
-        private readonly DatabaseContext context = new();
+        private readonly DatabaseContext context;
 
-        public DashboardController(SignInManager<IdentityUser> signInManager)
+        public DashboardController(SignInManager<IdentityUser> signInManager, DatabaseContext context)
         {
             this.signInManager = signInManager;
+            this.context = context;
         }
         [AllowAnonymous]
         public IActionResult Login()
