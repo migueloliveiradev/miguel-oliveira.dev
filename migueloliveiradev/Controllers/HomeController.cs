@@ -13,8 +13,7 @@ public class HomeController : Controller
     [Route("/")]
     public IActionResult Home()
     {
-        DatabaseContext context = new();
-        ViewData["social-links"] = _context.RedeSociais.ToList();
+        ViewData["social-links"] = _context.SocialNetworks.ToList();
         return View();
     }
 }

@@ -1,30 +1,32 @@
 ﻿using Microsoft.AspNetCore.Mvc;
-using migueloliveiradev.Database;
 using migueloliveiradev.Models.Works;
+using migueloliveiradev.Repositories.Works.Services;
 
 namespace migueloliveiradev.Controllers.Dashboard;
 
 public class ServicoController : Controller
 {
-    private readonly DatabaseContext context = new();
+    private readonly IServiceRepository repository;
+    public ServicoController(IServiceRepository serviceRepository)
+    {
+        repository = serviceRepository;
+    }
+    [HttpPost("dashboard/services/create")]
     public IActionResult Create(Service service)
     {
-        context.Services.Add(service);
-        context.SaveChanges();
+        repository.Create(service);
         return RedirectToAction("Servicos", "Dashboard");
     }
+    [HttpPost("dashboard/services/edit")]
     public IActionResult Edit(Service service)
     {
-        context.Services.Update(service);
-        context.SaveChanges();
+        repository.Update(service);
         return RedirectToAction("Servicos", "Dashboard");
     }
+    [Route("dashboard/services/{id}/delete")]
     public IActionResult Delete(int id)
     {
-        Service? service = context.Services.Find(id);
-        context.Services.Remove(service);
-        context.SaveChanges();
+        repository.Delete(id);
         return RedirectToAction("Servicos", "Dashboard");
     }
-
 }

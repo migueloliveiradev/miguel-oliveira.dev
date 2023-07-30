@@ -8,6 +8,8 @@ using migueloliveiradev.Models.Me;
 using migueloliveiradev.Models.Network;
 using migueloliveiradev.Models.Works;
 using migueloliveiradev.Models.Works.Projetos;
+using migueloliveiradev.Repositories.Home.Dashboard;
+using migueloliveiradev.ViewsModel;
 
 namespace migueloliveiradev.Controllers;
 
@@ -16,11 +18,13 @@ public class DashboardController : Controller
 {
     private readonly SignInManager<IdentityUser> signInManager;
     private readonly DatabaseContext context;
+    private readonly IHomeDashboardRepository homeDashboardRepository;
 
-    public DashboardController(SignInManager<IdentityUser> signInManager, DatabaseContext context)
+    public DashboardController(SignInManager<IdentityUser> signInManager, DatabaseContext context, IHomeDashboardRepository homeDashboardRepository)
     {
         this.signInManager = signInManager;
         this.context = context;
+        this.homeDashboardRepository = homeDashboardRepository;
     }
     [AllowAnonymous]
     public IActionResult Login()
@@ -35,12 +39,13 @@ public class DashboardController : Controller
     }
     public IActionResult Home()
     {
-        return View();
+        HomeDashboardViewModel homeDashboardViewModel = homeDashboardRepository.GetHomeDashboardViewModel();
+        return View(homeDashboardViewModel);
     }
 
     public IActionResult Social()
     {
-        List<RedeSocial> redes = context.RedeSociais.ToList();
+        List<SocialNetwork> redes = context.SocialNetworks.ToList();
         return View(redes);
     }
 
@@ -50,15 +55,15 @@ public class DashboardController : Controller
         return View(about);
     }
 
-    public IActionResult Skills()
+    public IActionResult Technology()
     {
-        List<Skill> skills = context.Skills.ToList();
+        List<Technology> skills = context.Technologies.ToList();
         return View(skills);
     }
 
     public IActionResult Portfolio()
     {
-        List<Projeto> projetos = context.Projetos.Include(p => p.Tecnologias).Include(p => p.Imagens).ToList();
+        List<Project> projetos = context.Projects.Include(p => p.Technologies).Include(p => p.Images).ToList();
         return View(projetos);
     }
 

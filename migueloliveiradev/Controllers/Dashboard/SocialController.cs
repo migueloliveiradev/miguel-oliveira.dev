@@ -1,30 +1,32 @@
 ﻿using Microsoft.AspNetCore.Mvc;
-using migueloliveiradev.Database;
 using migueloliveiradev.Models.Network;
+using migueloliveiradev.Repositories.SocialNetworks;
 
 namespace migueloliveiradev.Controllers.Dashboard;
 
 public class SocialController : Controller
 {
-    private readonly DatabaseContext context = new();
-    public IActionResult Create(RedeSocial rede)
+    private readonly ISocialNetworkRepository repository;
+    public SocialController(ISocialNetworkRepository repository)
     {
-        context.RedeSociais.Add(rede);
-        context.SaveChanges();
+        this.repository = repository;
+    }
+    [HttpPost("dashboard/social/create")]
+    public IActionResult Create(SocialNetwork social)
+    {
+        repository.Create(social);
         return RedirectToAction("Social", "Dashboard");
     }
-    public IActionResult Edit(RedeSocial rede)
+    [HttpPost("dashboard/social/edit")]
+    public IActionResult Edit(SocialNetwork social)
     {
-        context.RedeSociais.Update(rede);
-        context.SaveChanges();
+        repository.Update(social);
         return RedirectToAction("Social", "Dashboard");
     }
+    [Route("dashboard/social/{id}/delete")]
     public IActionResult Delete(int id)
     {
-        RedeSocial? rede = context.RedeSociais.Find(id);
-        context.RedeSociais.Remove(rede);
-        context.SaveChanges();
+        repository.Delete(id);
         return RedirectToAction("Social", "Dashboard");
     }
-
 }
