@@ -4,9 +4,10 @@ namespace migueloliveiradev.Repositories.Works.Services;
 
 public interface IServiceRepository
 {
-    IEnumerable<Models.Works.Service> GetServices();
-    Service GetService(int id);
-    void CreateService(Service service);
-    void UpdateService(Service service);
-    void DeleteService(int id);
+    Service GetById(int id);
+    IEnumerable<Service> GetAll();
+    int GetCount();
+    void Create(Service service);
+    void Update(Service service);
+    void Delete(int id);
 }
