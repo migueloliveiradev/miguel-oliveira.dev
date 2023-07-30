@@ -4,14 +4,15 @@ namespace migueloliveiradev;
 
 public class Program
 {
-    public static async Task Main()
+    public static void Main()
     {
         WebApplicationBuilder builder = WebApplication.CreateBuilder();
         builder.Services.AddRazorPages();
-        builder.Services.AddControllersWithViews();
+        builder.Services.AddControllersWithViews().AddRazorRuntimeCompilation();
 
         builder.Services.ConfigureDbContext(builder.Configuration);
         builder.Services.ConfigureIdentity();
+        builder.Services.ConfigureDependencyInjection();
 
         WebApplication app = builder.Build();
 

@@ -1,7 +1,7 @@
 ﻿@using migueloliveiradev.Models.Works.Projetos;
-@model Projeto
+@model Project
 
-<div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+<div class="modal fade" id="ModalNewProject" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
     <div class="modal-dialog modal-xl">
         <div class="modal-content">
             <div class="modal-header">
@@ -11,30 +11,31 @@
             <form asp-action="Create" asp-controller="Projeto">
                 <div class="modal-body">
 
-                    <div class="form-floating mb-3">
-                        <input asp-for="Titulo" class="form-control" placeholder="Escreva o titulo do projeto" id="input-title"></input>
-                        <label for="input-title">Titulo</label>
+                    <div class="mb-3">
+                        <label class="form-label">Titulo</label>
+                        <input asp-for="Titulo" type="text" class="form-control" placeholder="Escreva o titulo do projeto" id="input-title" required />
                     </div>
-                    <div class="form-floating mb-3">
-                        <input asp-for="SubTitulo" class="form-control" placeholder="Escreva o subtitulo do projeto" id="input-subject"></input>
-                        <label for="input-subject">Subtitulo</label>
+                    <div class="mb-3">
+                        <label class="form-label">Subtitulo</label>
+                        <input asp-for="SubTitulo" type="text" class="form-control" placeholder="Escreva o subtitulo do projeto" id="input-subject" required />
                     </div>
-                    <div class="form-floating mb-3">
-                        <textarea asp-for="Descricao" class="form-control" spellcheck="false" placeholder="Escreva a descrição do projeto" id="input-description"></textarea>
-                        <label for="input-description">Descrição</label>
+                    <div class="mb-3">
+                        <label class="form-label">Descrição</label>
+                        <textarea asp-for="Descricao" class="form-control" placeholder="Escreva a descrição do projeto" id="input-description" required></textarea>
                     </div>
-                    <div class="form-floating mb-3">
-                        <input asp-for="Url" class="form-control" placeholder="Escreva a url do projeto aqui" id="input-url"></input>
-                        <label for="input-url">Url</label>
+                    <div class="mb-3">
+                        <label class="form-label">Url</label>
+                        <input asp-for="Url" type="text" class="form-control" placeholder="Escreva a url do projeto" id="input-url" required />
                     </div>
-                    <div class="form-floating mb-3">
-                        <input asp-for="UrlGithub" class="form-control" placeholder="Escreva a url do repositorio github aqui" id="input-url-github"></input>
-                        <label for="input-url-github">Url Github</label>
+                    <div class="mb-3">
+                        <label class="form-label">Url Linkedin</label>
+                        <input asp-for="UrlLinkedin" type="text" class="form-control" placeholder="Escreva a url do linkedin do projeto" id="input-url-linkedin" required />
                     </div>
-                    <div class="form-floating mb-3">
-                        <input asp-for="UrlLinkedin" class="form-control" placeholder="Escreva a url do post linkedin" id="input-url-linkedin"></input>
-                        <label for="input-url-linkedin">Url Linkedin</label>
+                    <div>
+                        <label class="form-label">Url Github</label>
+                        <input asp-for="UrlGithub" type="text" class="form-control" placeholder="Escreva a url do github do projeto" id="input-url-github" required />
                     </div>
+                   
                 </div>
 
                 <div class="modal-footer">
@@ -42,8 +43,6 @@
                     <button type="submit" class="btn btn-primary">Salvar</button>
                 </div>
             </form>
-
-
         </div>
     </div>
 </div>

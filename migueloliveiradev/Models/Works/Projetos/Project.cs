@@ -1,6 +1,6 @@
 ﻿namespace migueloliveiradev.Models.Works.Projetos;
 
-public class Projeto
+public class Project
 {
     public int Id { get; set; }
     public string Titulo { get; set; }
@@ -12,7 +12,6 @@ public class Projeto
     public bool Working { get; set; }
     public DateTime? DateStart { get; set; }
     public DateTime? DateEnd { get; set; }
-    public List<Imagem> Imagens { get; set; }
-    public List<Tecnologia> Tecnologias { get; set; }
-
+    public virtual List<Image> Images { get; set; }
+    public virtual List<Technology> Technologies { get; set; }
 }

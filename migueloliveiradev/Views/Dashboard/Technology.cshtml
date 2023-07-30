@@ -1,31 +1,32 @@
 ﻿@using migueloliveiradev.Models.Works;
-@model List<Skill>
+
+@model List<Technology>
 @{
     Layout = "_LayoutDashboard";
+    ViewData["title"] = "Tecnologias";
 }
-<div class="p-3">
-    <table class="table">
+<nav class="navbar navbar-expand-lg bg-body-tertiary" style="width: 100%; background-color: #000814;">
+    <p class="navbar-brand text-light p-0 m-3">Cadastro de Tecnologias</p>
+</nav>
+<div class="card p-3 m-3" style="background-color: #FAF3F0">
+    <table class="table table-hover table-responsive">
         <thead>
             <tr>
                 <th scope="col"></th>
                 <th scope="col">Nome</th>
                 <th scope="col">Class Icon</th>
-                <th scope="col">Porcentagem</th>
+                <th scope="col">Projetos</th>
                 <th scope="col">Opções</th>
             </tr>
         </thead>
         <tbody>
-            @foreach (Skill skill in Model)
+            @foreach (Technology tech in Model)
             {
                 <tr>
-                    <th><i class="w-25 h-25 @skill.Icon"></i></th>
-                    <td>@skill.Nome</td>
-                    <td>@skill.Icon</td>
-                    <td>
-                        <div class="progress mt-2" role="progressbar" aria-label="Basic example" aria-valuenow="0" aria-valuemin="0" aria-valuemax="100">
-                            <div class="progress-bar" style="width: @skill.Percentage%"></div>
-                        </div>
-                    </td>
+                    <th><i class="w-25 h-25 @tech.Icon fa-2xl"></i></th>
+                    <td>@tech.Nome</td>
+                    <td>@tech.Icon</td>
+                    <td>@tech.Projetos.Count</td>
                     <td>
                         <button type="button" class="btn">Editar</button>
                         <a class="btn" >Excluir</a>
@@ -35,7 +36,7 @@
             @if (!Model.Any())
             {
                 <tr>
-                    <th colspan="4">Nenhuma skill adicionada.</th>
+                    <th colspan="5">Nenhuma skill adicionada.</th>
 
                 </tr>
             }

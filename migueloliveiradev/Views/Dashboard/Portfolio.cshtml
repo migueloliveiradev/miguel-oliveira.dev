@@ -1,18 +1,16 @@
 ﻿@using migueloliveiradev.Models.Works.Projetos;
-@model List<Projeto>
+@model List<Project>
 @{
     Layout = "_LayoutDashboard";
+    ViewData["title"] = "Projetos";
 }
 <style>
-
-   
-
     .technologies {
         display: flex;
         position: absolute;
         bottom: 0;
         left: 0;
-        margin: 1rem;
+        margin: 0;
     }
 
     .technologies span {
@@ -24,29 +22,41 @@
 
 </style>
 <link rel="stylesheet" href="~/css/dashboard/cards.css" />
-<div class="cards flex-column ">
+<nav class="navbar navbar-expand-lg bg-body-tertiary" style="width: 100%; background-color: #000814;">
+    <p class="navbar-brand text-light p-0 m-3">Cadastro de Projetos</p>
+</nav>
+<div class="cards m-3 flex-column ">
     @{
-        for (int i = 0; i < 6; i++)
+        foreach (Project project in Model)
         {
-            <div class="card position-relative shadow-sm border-0">
+            <div class="card position-relative shadow-sm border-0" style="background-color: #FAF3F0">
                 <div class="card-body d-flex flex-row">
                     <div class="flex-grow-1">
-                        <h5 class="card-title">Projeto</h5>
-                        <h6 class="card-subtitle mb-2 text-body-secondary">Projeto subtitulo teste bla bla bla</h6>
+                        <h5 class="card-title">@project.Titulo</h5>
+                        <h6 class="card-subtitle mb-2 text-body-secondary">@project.SubTitulo</h6>
                         <div>
-                            Projeto descrição teste bla bla bla bla
+                            @project.Descricao
                         </div>
                         <div>
-                            <a href="#" class="card-link">Url</a>
-                            <a href="#" class="card-link">Github</a>
-                            <a href="#" class="card-link">Linkedin</a>
+                            @if(!string.IsNullOrEmpty(project.Url))
+                            {
+                                <a href="@project.Url" class="card-link">Url</a>
+                            }
+                            @if (!string.IsNullOrEmpty(project.UrlLinkedin))
+                            {
+                                <a href="@project.UrlLinkedin" class="card-link">Linkedin</a>
+                            }
+                            @if (!string.IsNullOrEmpty(project.UrlGithub))
+                            {
+                                <a href="@project.UrlGithub" class="card-link">Github</a>
+                            }
                         </div>
                     </div>
                     <div class="position-absolute top-0 end-0 m-3">
                         <div class="d-flex flex-column">
                             <a href="#" class="btn btn-primary my-1">Editar</a>
                             <a href="#" class="btn btn-primary my-1">Editar Imagens</a>
-                            <button type="button" class="btn btn-primary my-1" data-bs-toggle="modal" data-bs-project-id="@i" data-bs-target="#modalEditTechnologies">
+                            <button type="button" class="btn btn-primary my-1" data-bs-toggle="modal" data-bs-project-id="@project.Id" data-bs-target="#modalEditTechnologies">
                                 Editar Tecnologias
                             </button>
                             <a href="#" class="btn btn-primary my-1">Excluir</a>
@@ -59,16 +69,23 @@
                             <span class="badge bg-secondary">CSS</span>
                         </div>
                     </div>
-                    <div class="position-absolute bottom-0 end-0 m-3">
-                        <div class="informacoes">20/02/2023 - 30/03/2023</div>
-                    </div>
+                    @if (!string.IsNullOrEmpty(project.DateStart.ToString()))
+                    {
+                        <div class="position-absolute bottom-0 end-0 m-3">
+                            <div class="informacoes">@project.DateStart - @project.DateEnd</div>
+                        </div>
+                    }
+                    else
+                    {
+                        <label class="position-absolute bottom-0 end-0 m-3">Em andamento</label>
+                    }
                 </div>
             </div>
         }
     }
 </div>
 <div class="position-absolute top-3 end-0 m-3">
-    <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#exampleModal">
+    <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#ModalNewProject">
         Adicionar
     </button>
 </div>

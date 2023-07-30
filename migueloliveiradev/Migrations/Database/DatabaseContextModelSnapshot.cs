@@ -16,22 +16,25 @@ namespace migueloliveiradev.Migrations.Database
         {
 #pragma warning disable 612, 618
             modelBuilder
-                .HasAnnotation("ProductVersion", "7.0.5")
+                .HasAnnotation("ProductVersion", "7.0.9")
+                .HasAnnotation("Proxies:ChangeTracking", false)
+                .HasAnnotation("Proxies:CheckEquality", false)
+                .HasAnnotation("Proxies:LazyLoading", true)
                 .HasAnnotation("Relational:MaxIdentifierLength", 64);
 
-            modelBuilder.Entity("ProjetoTecnologia", b =>
+            modelBuilder.Entity("ProjectTechnology", b =>
                 {
                     b.Property<int>("ProjetosId")
                         .HasColumnType("int");
 
-                    b.Property<int>("TecnologiasId")
+                    b.Property<int>("TechnologiesId")
                         .HasColumnType("int");
 
-                    b.HasKey("ProjetosId", "TecnologiasId");
+                    b.HasKey("ProjetosId", "TechnologiesId");
 
-                    b.HasIndex("TecnologiasId");
+                    b.HasIndex("TechnologiesId");
 
-                    b.ToTable("ProjetoTecnologia");
+                    b.ToTable("ProjectTechnology");
                 });
 
             modelBuilder.Entity("migueloliveiradev.Models.Me.About", b =>
@@ -86,7 +89,7 @@ namespace migueloliveiradev.Migrations.Database
                     b.ToTable("Contacts");
                 });
 
-            modelBuilder.Entity("migueloliveiradev.Models.Network.RedeSocial", b =>
+            modelBuilder.Entity("migueloliveiradev.Models.Network.SocialNetwork", b =>
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
@@ -106,10 +109,10 @@ namespace migueloliveiradev.Migrations.Database
 
                     b.HasKey("Id");
 
-                    b.ToTable("RedeSociais");
+                    b.ToTable("SocialNetworks");
                 });
 
-            modelBuilder.Entity("migueloliveiradev.Models.Works.Projetos.Imagem", b =>
+            modelBuilder.Entity("migueloliveiradev.Models.Works.Projetos.Image", b =>
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
@@ -130,10 +133,10 @@ namespace migueloliveiradev.Migrations.Database
 
                     b.HasIndex("ProjetoId");
 
-                    b.ToTable("Imagens");
+                    b.ToTable("Images");
                 });
 
-            modelBuilder.Entity("migueloliveiradev.Models.Works.Projetos.Projeto", b =>
+            modelBuilder.Entity("migueloliveiradev.Models.Works.Projetos.Project", b =>
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
@@ -171,21 +174,25 @@ namespace migueloliveiradev.Migrations.Database
 
                     b.HasKey("Id");
 
-                    b.ToTable("Projetos");
+                    b.ToTable("Projects");
                 });
 
-            modelBuilder.Entity("migueloliveiradev.Models.Works.Projetos.Tecnologia", b =>
+            modelBuilder.Entity("migueloliveiradev.Models.Works.Projetos.Technology", b =>
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("int");
 
-                    b.Property<int>("LogoId")
-                        .HasColumnType("int");
+                    b.Property<string>("Icon")
+                        .IsRequired()
+                        .HasColumnType("longtext");
 
                     b.Property<string>("Nome")
                         .IsRequired()
                         .HasColumnType("longtext");
+
+                    b.Property<int>("TypeIcon")
+                        .HasColumnType("int");
 
                     b.Property<string>("Url")
                         .IsRequired()
@@ -193,9 +200,7 @@ namespace migueloliveiradev.Migrations.Database
 
                     b.HasKey("Id");
 
-                    b.HasIndex("LogoId");
-
-                    b.ToTable("Tecnologias");
+                    b.ToTable("Technologies");
                 });
 
             modelBuilder.Entity("migueloliveiradev.Models.Works.Service", b =>
@@ -221,47 +226,25 @@ namespace migueloliveiradev.Migrations.Database
                     b.ToTable("Services");
                 });
 
-            modelBuilder.Entity("migueloliveiradev.Models.Works.Skill", b =>
+            modelBuilder.Entity("ProjectTechnology", b =>
                 {
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int");
-
-                    b.Property<string>("Icon")
-                        .IsRequired()
-                        .HasColumnType("longtext");
-
-                    b.Property<string>("Nome")
-                        .IsRequired()
-                        .HasColumnType("longtext");
-
-                    b.Property<int>("Percentage")
-                        .HasColumnType("int");
-
-                    b.HasKey("Id");
-
-                    b.ToTable("Skills");
-                });
-
-            modelBuilder.Entity("ProjetoTecnologia", b =>
-                {
-                    b.HasOne("migueloliveiradev.Models.Works.Projetos.Projeto", null)
+                    b.HasOne("migueloliveiradev.Models.Works.Projetos.Project", null)
                         .WithMany()
                         .HasForeignKey("ProjetosId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
-                    b.HasOne("migueloliveiradev.Models.Works.Projetos.Tecnologia", null)
+                    b.HasOne("migueloliveiradev.Models.Works.Projetos.Technology", null)
                         .WithMany()
-                        .HasForeignKey("TecnologiasId")
+                        .HasForeignKey("TechnologiesId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
                 });
 
-            modelBuilder.Entity("migueloliveiradev.Models.Works.Projetos.Imagem", b =>
+            modelBuilder.Entity("migueloliveiradev.Models.Works.Projetos.Image", b =>
                 {
-                    b.HasOne("migueloliveiradev.Models.Works.Projetos.Projeto", "Projeto")
-                        .WithMany("Imagens")
+                    b.HasOne("migueloliveiradev.Models.Works.Projetos.Project", "Projeto")
+                        .WithMany("Images")
                         .HasForeignKey("ProjetoId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
@@ -269,20 +252,9 @@ namespace migueloliveiradev.Migrations.Database
                     b.Navigation("Projeto");
                 });
 
-            modelBuilder.Entity("migueloliveiradev.Models.Works.Projetos.Tecnologia", b =>
+            modelBuilder.Entity("migueloliveiradev.Models.Works.Projetos.Project", b =>
                 {
-                    b.HasOne("migueloliveiradev.Models.Works.Projetos.Imagem", "Logo")
-                        .WithMany()
-                        .HasForeignKey("LogoId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.Navigation("Logo");
-                });
-
-            modelBuilder.Entity("migueloliveiradev.Models.Works.Projetos.Projeto", b =>
-                {
-                    b.Navigation("Imagens");
+                    b.Navigation("Images");
                 });
 #pragma warning restore 612, 618
         }

@@ -1,6 +1,6 @@
 ﻿namespace migueloliveiradev.Models.Network;
 
-public class RedeSocial
+public class SocialNetwork
 {
     public int Id { get; set; }
     public string Nome { get; set; }

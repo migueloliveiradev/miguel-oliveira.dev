@@ -1,5 +1,5 @@
 ﻿@using migueloliveiradev.Models.Works.Projetos;
-@model Projeto
+@model Project
 @{
 }
 
@@ -14,13 +14,13 @@
                 <div class="d-flex">
                     <select :disabled="technologies.length == 0" class="form-select" v-model="selected">
                         <option v-if="technologies.length === 0" value="" selected>Todas tecnologias selecionadas</option>
-                        <option v-for="(tech, index) in technologies">{{ tech }}</option>
+                        <option v-for="(tech, index) in technologies" :value="tech.id">{{ tech.nome }}</option>
                     </select>
                     <button class="btn btn-primary mr-3" v-on:click="AddTech()">Adicionar</button>
                 </div>
                 <div>
                     <a class="btn btn-success mt-3 ms-1" v-for="tech in technologiesSelected">
-                        {{ tech }}
+                        {{ tech.nome }}
                     </a>
                 </div>
             </div>
@@ -31,49 +31,4 @@
         </div>
     </div>
 </div>
-<script>
-    const { createApp } = Vue
-
-    const app = createApp({
-        data() {
-            return {
-                technologies: [
-                    "C#",
-                    "HTML",
-                    "Java",
-                    "PHP"
-                ],
-                technologiesSelected: [],
-                selected: String
-            }
-        },
-        methods: {
-            AddTech() {
-                if(this.selected == null || this.selected == undefined || this.selected == '')
-                    return
-                this.technologies = this.technologies.filter(tech => tech != this.selected)
-                this.technologiesSelected.push(this.selected)
-                this.selected = this.technologies[0] ?? '';
-            },
-            salvar() {
-                //axios post to save technologies in project
-                console.log("salvando...");
-                clear()
-            },
-            clear(){
-                this.technologiesSelected = [];
-                this.technologies = [];
-                this.selected = '';
-            }
-        },
-        mounted() {
-            this.selected = this.technologies[0];
-            const modal = document.getElementById('modalEditTechnologies');
-            modal.addEventListener('show.bs.modal', event => {
-                const button = event.relatedTarget
-                const id = button.getAttribute('data-bs-project-id')
-            });
-        }
-    })
-    app.mount('#modalEditTechnologies')
-</script>
+<script src="/js/dashboard/projects/edit_tecnologies.js"></script>

@@ -1,6 +1,15 @@
 ﻿using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 using migueloliveiradev.Database;
+using migueloliveiradev.Repositories.Abouts;
+using migueloliveiradev.Repositories.Contacts;
+using migueloliveiradev.Repositories.Home;
+using migueloliveiradev.Repositories.Home.Dashboard;
+using migueloliveiradev.Repositories.SocialNetworks;
+using migueloliveiradev.Repositories.Works.Projects.Images;
+using migueloliveiradev.Repositories.Works.Projects.ProjectsRepos;
+using migueloliveiradev.Repositories.Works.Projects.Technologies;
+using migueloliveiradev.Repositories.Works.Services;
 
 namespace migueloliveiradev.Config;
 
@@ -8,10 +17,18 @@ public static class IServiceCollectionExtensions
 {
     public static IServiceCollection ConfigureDbContext(this IServiceCollection services, ConfigurationManager config)
     {
-        string connectionString = config.GetConnectionString("MYSQL_CONNECTION")!;
-        services.AddDbContext<DatabaseUsersContext>(options => options.UseMySql(connectionString, ServerVersion.AutoDetect(connectionString)));
+        string connection = config.GetConnectionString("MYSQL_CONNECTION")!;
+        services.AddDbContext<DatabaseUsersContext>(options =>
+        {
+            options.UseMySql(connection, ServerVersion.AutoDetect(connection));
+            options.UseLazyLoadingProxies();
+        });
 
-        services.AddDbContext<DatabaseContext>(options => options.UseMySql(connectionString, ServerVersion.AutoDetect(connectionString)));
+        services.AddDbContext<DatabaseContext>(options =>
+        {
+            options.UseMySql(connection, ServerVersion.AutoDetect(connection));
+            options.UseLazyLoadingProxies();
+        });
 
         return services;
     }
@@ -49,6 +66,21 @@ public static class IServiceCollectionExtensions
                 options.AccessDeniedPath = "/";
                 options.SlidingExpiration = true;
             });
+
+        return services;
+    }
+
+    public static IServiceCollection ConfigureDependencyInjection(this IServiceCollection services)
+    {
+        services.AddScoped<IProjectsRepository, ProjectsRepository>();
+        services.AddScoped<IAboutRepository, AboutRepository>();
+        services.AddScoped<ISocialNetworkRepository, SocialNetworkRepository>();
+        services.AddScoped<IImagesRepository, ImagesRepository>();
+        services.AddScoped<ITechnologyRepository, TechnologyRepository>();
+        services.AddScoped<IContactRepository, ContactRepository>();
+        services.AddScoped<IServiceRepository, ServiceRepository>();
+        services.AddScoped<IHomeRepository, HomeRepository>();
+        services.AddScoped<IHomeDashboardRepository, HomeDashboardRepository>();
 
         return services;
     }

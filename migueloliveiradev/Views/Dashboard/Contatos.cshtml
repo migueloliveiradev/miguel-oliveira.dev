@@ -2,20 +2,28 @@
 @model List<Contact>
 @{
     Layout = "_LayoutDashboard";
+    ViewData["title"] = "Contatos";
 }
 <link rel="stylesheet" href="~/css/dashboard/cards.css" />
-<div class="cards cards-contact flex-column ">
+<nav class="navbar navbar-expand-lg bg-body-tertiary" style="width: 100%; background-color: #000814;">
+    <p class="navbar-brand text-light p-0 m-3">Contatos recebidos</p>
+    <div class="d-flex">
+        <input class="form-control me-2" type="search" placeholder="Pesquisar" aria-label="Pesquisar" style="width: 400px">
+        <select class="form-control" asp-items="Html.GetEnumSelectList<Status>()">
+        </select>
+        <button class="btn btn-outline-success ms-2" type="submit">Pesquisar</button>
+    </div>
+</nav>
+<div class="cards cards-contact flex-column m-3">
     @{
-        for (int i = 0; i < 6; i++)
+        foreach (Contact contact in Model)
         {
             <div class="card position-relative shadow-sm">
                 <div class="card-body d-flex flex-row">
                     <div class="flex-grow-1">
-                        <h5 class="card-title">Nome Legal</h5>
-                        <h6 class="card-subtitle mb-2 text-body-secondary">Assunto Legal</h6>
-                        <div>
-                            Mensagem teste bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla 
-                        </div>
+                        <h5 class="card-title">@contact.Name</h5>
+                        <h6 class="card-subtitle mb-2 text-body-secondary">@contact.Subject</h6>
+                        <div>@contact.Message</div>
                     </div>
                     <div class="position-absolute top-0 end-0 m-3">
                         <div class="d-flex flex-column">
@@ -26,10 +34,10 @@
                         </div>
                     </div>
                     <div class="position-absolute bottom-0 start-0 m-3">
-                        <p>emaillegal@email.com</p>
+                        <p class="mb-0">@contact.Email</p>
                     </div>
                     <div class="position-absolute bottom-0 end-0 m-3">
-                        <div>30/03/2023</div>
+                        <div>@contact.SendDate</div>
                     </div>
                 </div>
             </div>
