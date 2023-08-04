@@ -13,6 +13,7 @@ public class Program
         builder.Services.ConfigureDbContext(builder.Configuration);
         builder.Services.ConfigureIdentity();
         builder.Services.ConfigureDependencyInjection();
+        builder.ConfigureEnvironmentVariables();
 
         WebApplication app = builder.Build();
 
