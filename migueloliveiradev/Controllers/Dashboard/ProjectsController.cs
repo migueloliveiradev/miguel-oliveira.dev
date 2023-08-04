@@ -10,11 +10,13 @@ namespace migueloliveiradev.Controllers.Dashboard;
 public class ProjectsController : Controller
 {
     private readonly IProjectsRepository repository;
+    private readonly IImageService imageService;
     private readonly DatabaseContext context;
-    public ProjectsController(IProjectsRepository repository, DatabaseContext context)
+    public ProjectsController(IProjectsRepository repository, DatabaseContext context, IImageService imageService)
     {
         this.repository = repository;
         this.context = context;
+        this.imageService = imageService;
     }
     [Route("dashboard/projects")]
     public IActionResult Home()
@@ -67,7 +69,7 @@ public class ProjectsController : Controller
                 NameWebp = file_name_webp
             };
 
-            await ImagemService.UploadImageStorage(file.OpenReadStream(), file.ContentType, file_name, file_name_webp);
+            await imageService.UploadImage(file.OpenReadStream(), file.ContentType, uuid);
             context.Images.Add(image);
             context.SaveChanges();
             transaction.Commit();
@@ -80,7 +82,8 @@ public class ProjectsController : Controller
         using (var transaction = context.Database.BeginTransaction())
         {
             Image image = context.Images.Find(idImage)!;
-            await ImagemService.DeleteImageStorage(image.Name);
+            await Task.WhenAll(imageService.DeleteImage(image.Name),
+                               imageService.DeleteImage(image.NameWebp));
             context.Images.Remove(image);
             context.SaveChanges();
             transaction.Commit();
