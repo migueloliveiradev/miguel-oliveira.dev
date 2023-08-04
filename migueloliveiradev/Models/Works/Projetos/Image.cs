@@ -5,10 +5,11 @@ namespace migueloliveiradev.Models.Works.Projetos;
 public class Image
 {
     public int Id { get; set; }
-    public string Descricao { get; set; }
-    public string Url { get ; set; }
+    public string Description { get; set; }
+    public string Name { get ; set; }
+    public string NameWebp { get; set; }
     [NotMapped]
-    public string UrlCompleta => $"{Environment.GetEnvironmentVariable("SITE_URL_IMAGES")}/{Url}";
+    public string Url => $"{Environment.GetEnvironmentVariable("SITE_URL_IMAGES")}/{Name}";
     [ForeignKey("Projeto")]
     public int ProjetoId { get; set; }
 

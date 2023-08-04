@@ -1,9 +1,13 @@
-﻿using Oci.Common;
+﻿using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.WebUtilities;
+using Oci.Common;
 using Oci.Common.Auth;
 using Oci.ObjectstorageService;
 using Oci.ObjectstorageService.Requests;
 using Org.BouncyCastle.Crypto.Parameters;
 using Org.BouncyCastle.OpenSsl;
+using SixLabors.ImageSharp;
+using SixLabors.ImageSharp.Formats.Webp;
 
 namespace migueloliveiradev.Services.Project;
 
@@ -20,11 +24,13 @@ public class ImagemService
 
     private readonly static ObjectStorageClient osClient = new(config);
 
-    public static async Task UploadImageStorage(Stream file, string contentType, string file_name)
+    public static async Task UploadImageStorage(Stream file, string contentType, string file_name, string file_name_webp)
     {
+        Stream imageWebp = await ConverterImageToWebp(file);
         if (Environment.GetEnvironmentVariable("ASPNETCORE_ENVIRONMENT") == "Development")
         {
             await UploadImageLocal(file, file_name);
+            await UploadImageLocal(imageWebp, file_name_webp);
             return;
         }
 
@@ -89,8 +95,20 @@ public class ImagemService
             Directory.CreateDirectory(path);
         }
         using FileStream fs = new(Path.Combine(path, file_name), FileMode.Create);
+        file.Seek(0, SeekOrigin.Begin);
         await file.CopyToAsync(fs);
         return;
+    }
+
+    private static async Task<Stream> ConverterImageToWebp(Stream stream)
+    {
+        using Image image = await Image.LoadAsync(stream);
+
+        using (MemoryStream imageWebp = new())
+        {
+            await image.SaveAsync(imageWebp, new WebpEncoder() { Quality = 100 });
+            return new MemoryStream(imageWebp.ToArray());
+        };
     }
 }
 

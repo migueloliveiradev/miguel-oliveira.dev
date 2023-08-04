@@ -56,16 +56,18 @@ public class ProjectsController : Controller
         using (var transaction = context.Database.BeginTransaction())
         {
             Project projeto = context.Projects.Find(id)!;
-
-            string file_name = $"{Guid.NewGuid()}.{file.ContentType.Split('/')[1]}";
+            string uuid = Guid.NewGuid().ToString();
+            string file_name = $"{uuid}.{file.ContentType.Split('/')[1]}";
+            string file_name_webp = $"{uuid}.webp";
             Image image = new()
             {
-                Descricao = description,
+                Description = description,
                 ProjetoId = projeto.Id,
-                Url = file_name
+                Name = file_name,
+                NameWebp = file_name_webp
             };
 
-            await ImagemService.UploadImageStorage(file.OpenReadStream(), file.ContentType, file_name);
+            await ImagemService.UploadImageStorage(file.OpenReadStream(), file.ContentType, file_name, file_name_webp);
             context.Images.Add(image);
             context.SaveChanges();
             transaction.Commit();
@@ -78,7 +80,7 @@ public class ProjectsController : Controller
         using (var transaction = context.Database.BeginTransaction())
         {
             Image image = context.Images.Find(idImage)!;
-            await ImagemService.DeleteImageStorage(image.Url);
+            await ImagemService.DeleteImageStorage(image.Name);
             context.Images.Remove(image);
             context.SaveChanges();
             transaction.Commit();
