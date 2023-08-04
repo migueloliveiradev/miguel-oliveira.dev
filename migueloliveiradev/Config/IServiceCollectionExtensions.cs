@@ -1,6 +1,7 @@
 ﻿using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 using migueloliveiradev.Database;
+using migueloliveiradev.Jobs.Images;
 using migueloliveiradev.Repositories.Abouts;
 using migueloliveiradev.Repositories.Contacts;
 using migueloliveiradev.Repositories.Home;
@@ -10,6 +11,8 @@ using migueloliveiradev.Repositories.Works.Projects.Images;
 using migueloliveiradev.Repositories.Works.Projects.ProjectsRepos;
 using migueloliveiradev.Repositories.Works.Projects.Technologies;
 using migueloliveiradev.Repositories.Works.Services;
+using migueloliveiradev.Services.Project;
+using migueloliveiradev.Services.Storage;
 
 namespace migueloliveiradev.Config;
 
@@ -81,6 +84,9 @@ public static class IServiceCollectionExtensions
         services.AddScoped<IServiceRepository, ServiceRepository>();
         services.AddScoped<IHomeRepository, HomeRepository>();
         services.AddScoped<IHomeDashboardRepository, HomeDashboardRepository>();
+        services.AddScoped<IImageConverter, ImageConverter>();
+        services.AddScoped<IImageService, ImagemService>();
+        services.AddScoped<IStorageService, StorageService>();
 
         return services;
     }
