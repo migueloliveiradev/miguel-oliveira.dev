@@ -1,5 +1,5 @@
 ﻿@using migueloliveiradev.Models.Network;
-@model List<SocialNetwork>
+@model IEnumerable<SocialNetwork>
 @{
     Layout = "_LayoutDashboard";
     ViewData["title"] = "Redes Sociais";
@@ -36,7 +36,6 @@
             {
                 <tr>
                     <th colspan="5">Nenhuma rede social cadastrada.</th>
-                    
                 </tr>
             }
 
@@ -48,5 +47,5 @@
     Adicionar
 </button>
 </div>
-<partial name="Components\Dashboard\Social\Add.cshtml" model="null" />
+<partial name="Components\Add.cshtml" model="null" />
 

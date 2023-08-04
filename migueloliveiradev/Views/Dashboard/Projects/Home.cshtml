@@ -21,7 +21,7 @@
     }
 
 </style>
-<link rel="stylesheet" href="~/css/dashboard/cards.css" />
+
 <nav class="navbar navbar-expand-lg bg-body-tertiary" style="width: 100%; background-color: #000814 !important;">
     <p class="navbar-brand text-light p-0 m-3">Cadastro de Projetos</p>
 </nav>
@@ -29,15 +29,15 @@
     @{
         foreach (Project project in Model)
         {
-            <div class="card position-relative shadow-sm border-0" style="background-color: #FAF3F0 !important;">
+            <div class="card card-custom position-relative shadow-sm border-0">
                 <div class="card-body d-flex flex-row">
                     <div class="flex-grow-1">
                         <h5 class="card-title">@project.Titulo</h5>
                         <h6 class="card-subtitle mb-2 text-body-secondary">@project.SubTitulo</h6>
-                        <div>
+                        <div class="me-10">
                             @project.Descricao
                         </div>
-                        <div>
+                        <div class="mb-5">
                             @if(!string.IsNullOrEmpty(project.Url))
                             {
                                 <a href="@project.Url" class="card-link">Url</a>
@@ -54,12 +54,10 @@
                     </div>
                     <div class="position-absolute top-0 end-0 m-3">
                         <div class="d-flex flex-column">
-                            <a href="#" class="btn btn-primary my-1">Editar</a>
-                            <a href="#" class="btn btn-primary my-1">Editar Imagens</a>
-                            <button type="button" class="btn btn-primary my-1" data-bs-toggle="modal" data-bs-project-id="@project.Id" data-bs-target="#modalEditTechnologies">
-                                Editar Tecnologias
-                            </button>
-                            <a href="#" class="btn btn-primary my-1">Excluir</a>
+                            <a asp-action="Edit" asp-controller="Projects" asp-route-id="@project.Id" class="btn btn-primary my-1">Editar</a>
+                            <a asp-action="Images" asp-controller="Projects" asp-route-id="@project.Id" class="btn btn-primary my-1">Editar Imagens</a>
+                            <a asp-action="Tecnologies" asp-controller="Projects" asp-route-id="@project.Id" class="btn btn-primary my-1">Editar Tecnologias</a>
+                            <a asp-action="Edit" asp-controller="Projects" asp-route-id="@project.Id" class="btn btn-primary my-1">Excluir</a>
                         </div>
                     </div>
                     <div class="position-absolute bottom-0 start-0 m-3">
@@ -90,5 +88,5 @@
     </button>
 </div>
 <!-- Modal -->
-<partial name="Components\Dashboard\Project\AddProject.cshtml" model="null" />
-<partial name="Components\Dashboard\Project\EditTechnologies.cshtml" model="null" />
+<partial name="Components\AddProject.cshtml" model="null" />
+<partial name="Components\EditTechnologies.cshtml" model="null" />

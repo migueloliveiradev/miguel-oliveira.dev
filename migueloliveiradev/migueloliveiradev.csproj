@@ -39,6 +39,7 @@
   </ItemGroup>
 
   <ItemGroup>
+    <Folder Include="Views\Dashboard\Components\Dashboard\Project\" />
     <Folder Include="wwwroot\css\dashboard\portfolio\" />
     <Folder Include="wwwroot\css\site\" />
   </ItemGroup>

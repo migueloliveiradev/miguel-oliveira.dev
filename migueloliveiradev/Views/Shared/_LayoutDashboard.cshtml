@@ -8,6 +8,7 @@
     <link rel="stylesheet" href="~/lib/bootstrap/css/bootstrap.min.css" />
     <link rel="stylesheet" href="~/lib/font-awesome/css/all.min.css" />
     <link rel="stylesheet" href="~/css/dashboard/table.css" />
+    <link rel="stylesheet" href="~/css/dashboard/cards.css" />
     <script src="~/lib/vue/vue.global.js"></script>
 </head>
 <style>
@@ -36,44 +37,44 @@
             <hr>
             <ul class="nav nav-pills flex-column mb-auto">
                 <li class="nav-item">
-                    <a asp-action="Home" asp-controller="Dashboard" class="nav-link text-white @(ViewContext.RouteData.Values["Action"]?.ToString() == "Home" ? "active" : "")">
+                    <a asp-action="Home" asp-controller="Dashboard" class="nav-link text-white @(ViewContext.RouteData.Values["controller"]?.ToString() == "Dashboard" ? "active" : "")">
                         <i class="fa-solid fa-house mr-2"></i>
                         <span class="ml-2">Home</span>
                     </a>
                 </li>
                 <li>
-                    <a asp-action="Social" asp-controller="Dashboard" class="nav-link text-white @(ViewContext.RouteData.Values["Action"]?.ToString() == "Social" ? "active" : "")">
+                    <a asp-action="Home" asp-controller="Social" class="nav-link text-white @(ViewContext.RouteData.Values["controller"]?.ToString() == "Social" ? "active" : "")">
                         <i class="fa-solid fa-thumbs-up"></i>
                         Social
                     </a>
                 </li>
                 <li>
-                    <a asp-action="Sobre" asp-controller="Dashboard" class="nav-link text-white @(ViewContext.RouteData.Values["Action"]?.ToString() == "Sobre" ? "active" : "")">
+                    <a asp-action="Home" asp-controller="About" class="nav-link text-white @(ViewContext.RouteData.Values["controller"]?.ToString() == "About" ? "active" : "")">
                         <i class="fa-regular fa-address-card"></i>
                         Sobre
                     </a>
                 </li>
                 <li>
-                    <a asp-action="Technology" asp-controller="Dashboard" class="nav-link text-white @(ViewContext.RouteData.Values["Action"]?.ToString() == "Technology" ? "active" : "")">
+                    <a asp-action="Home" asp-controller="Technology" class="nav-link text-white @(ViewContext.RouteData.Values["controller"]?.ToString() == "Technology" ? "active" : "")">
                         <i class="fa-solid fa-wrench"></i>
                         Tecnologias
                     </a>
                 </li>
 
                 <li>
-                    <a asp-action="Portfolio" asp-controller="Dashboard" class="nav-link text-white @(ViewContext.RouteData.Values["Action"]?.ToString() == "Portfolio" ? "active" : "")">
+                    <a asp-action="Home" asp-controller="Projects" class="nav-link text-white @(ViewContext.RouteData.Values["controller"]?.ToString() == "Projects" ? "active" : "")">
                         <i class="fa-solid fa-laptop"></i>
-                        Portfolio
+                        Projetos
                     </a>
                 </li>
                  <li>
-                    <a asp-action="Servicos" asp-controller="Dashboard" class="nav-link text-white @(ViewContext.RouteData.Values["Action"]?.ToString() == "Servicos" ? "active" : "")">
+                    <a asp-action="Servicos" asp-controller="Dashboard" class="nav-link text-white @(ViewContext.RouteData.Values["controller"]?.ToString() == "Services" ? "active" : "")">
                         <i class="fa-solid fa-database"></i>
                         Serviços
                     </a>
                 </li>
                 <li>
-                    <a asp-action="Contatos" asp-controller="Dashboard" class="nav-link text-white @(ViewContext.RouteData.Values["Action"]?.ToString() == "Contatos" ? "active" : "")">
+                    <a asp-action="Home" asp-controller="Contact" class="nav-link text-white @(ViewContext.RouteData.Values["controller"]?.ToString() == "Contact" ? "active" : "")">
                         <i class="fa-regular fa-comment-dots"></i>
                         Contatos
                     </a>
