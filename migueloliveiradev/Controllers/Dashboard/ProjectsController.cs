@@ -1,35 +1,115 @@
 ﻿using Microsoft.AspNetCore.Mvc;
+using migueloliveiradev.Database;
 using migueloliveiradev.Models.Works;
 using migueloliveiradev.Models.Works.Projetos;
 using migueloliveiradev.Repositories.Works.Projects.ProjectsRepos;
+using migueloliveiradev.Services.Project;
 
 namespace migueloliveiradev.Controllers.Dashboard;
 
 public class ProjectsController : Controller
 {
     private readonly IProjectsRepository repository;
-    public ProjectsController(IProjectsRepository repository)
+    private readonly DatabaseContext context;
+    public ProjectsController(IProjectsRepository repository, DatabaseContext context)
     {
         this.repository = repository;
+        this.context = context;
     }
-    [Route("dashboard/projects/{id}/tecnologies/get")]
-    public IActionResult GetTechnologiesProjeto(int id)
+    [Route("dashboard/projects")]
+    public IActionResult Home()
     {
-        IEnumerable<Technology> techs = repository.GetTechnologies(id);
-        IEnumerable<Technology> techs2 = repository.GetTechnologiesNotSelected(id);
-        return Json(new
-        {
-            technology = techs,
-            technology_not_selected = techs2
-        });
+        IEnumerable<Project> projetos = repository.GetAllWithImagesAndTechnologies();
+        return View("Views/Dashboard/Projects/Home.cshtml", projetos);
     }
-    [Route("dashboard/projects/{id}")]
-    public IActionResult GetProjeto(int id)
+    [Route("dashboard/projects/{id}/edit")]
+    public IActionResult Edit(int id)
     {
         Project? projeto = repository.GetById(id);
-        return Ok(projeto);
+        if (projeto == null)
+        {
+            return NotFound();
+        }
+
+        return View("Views/Dashboard/Projects/Edit.cshtml", projeto);
     }
-    [Route("dashboard/projects/create")]
+    [HttpPost("dashboard/projects/{id}/edit")]
+    public IActionResult Edit(int id, Project projeto)
+    {
+        repository.Update(projeto);
+        return RedirectToAction("Home", "Projects");
+    }
+    [Route("dashboard/projects/{id}/images")]
+    public IActionResult Images(int id)
+    {
+        Project? projeto = repository.GetByIdWithImages(id);
+        if (projeto == null)
+        {
+            return NotFound();
+        }
+
+        return View("Views/Dashboard/Projects/Images.cshtml", projeto);
+    }
+    [HttpPost("dashboard/projects/{id}/image/upload")]
+    public async Task<IActionResult> UploadImages(int id, IFormFile file, string description)
+    {
+        using (var transaction = context.Database.BeginTransaction())
+        {
+            Project projeto = context.Projects.Find(id)!;
+
+            string file_name = $"{Guid.NewGuid()}.{file.ContentType.Split('/')[1]}";
+            Image image = new()
+            {
+                Descricao = description,
+                ProjetoId = projeto.Id,
+                Url = file_name
+            };
+
+            await ImagemService.UploadImageStorage(file.OpenReadStream(), file.ContentType, file_name);
+            context.Images.Add(image);
+            context.SaveChanges();
+            transaction.Commit();
+        }
+        return RedirectToAction("Images", "Projects", new { id });
+    }
+    [Route("dashboard/projects/{id}/image/delete/{idImage}")]
+    public async Task<IActionResult> DeleteImage(int id, int idImage)
+    {
+        using (var transaction = context.Database.BeginTransaction())
+        {
+            Image image = context.Images.Find(idImage)!;
+            await ImagemService.DeleteImageStorage(image.Url);
+            context.Images.Remove(image);
+            context.SaveChanges();
+            transaction.Commit();
+        }
+        return RedirectToAction("Images", "Projects", new { id });
+    }
+    [Route("dashboard/projects/{id}/tecnologies")]
+    public IActionResult Tecnologies(int id)
+    {
+        Project? projeto = repository.GetByIdWithTechnologies(id);
+        if (projeto == null)
+        {
+            return NotFound();
+        }
+        IEnumerable<Technology> tecs = repository.GetTechnologiesNotSelected(id);
+
+        return View("Views/Dashboard/Projects/Tecnologies.cshtml", (projeto, tecs));
+    }
+    [Route("dashboard/projects/{id}/tecnologies/{id_tech}/add")]
+    public IActionResult AddTechnology(int id, int id_tech)
+    {
+        repository.AddTechnology(id, id_tech);
+        return RedirectToAction("Tecnologies", "Projects", new { id });
+    }
+    [Route("dashboard/projects/{id}/tecnologies/{id_tech}/remove")]
+    public IActionResult RemoveTechnology(int id, int id_tech)
+    {
+        repository.RemoveTechnology(id, id_tech);
+        return RedirectToAction("Tecnologies", "Projects", new { id });
+    }
+    [HttpPost("dashboard/projects/create")]
     public IActionResult Create(Project projeto)
     {
         repository.Create(projeto);
@@ -47,33 +127,4 @@ public class ProjectsController : Controller
         repository.Delete(id);
         return Ok();
     }
-    [Route("dashboard/projects/{id}/tecnologies/add/{idTecnologia}")]
-    public IActionResult AddTechnology(int id, int idTecnologia)
-    {
-        repository.AddTechnology(id, idTecnologia);
-        return Ok();
-    }
-    /*public async Task<IActionResult> AddImages(int projectId, List<IFormFile> files)
-    {
-        Project? projeto = context.Projetos.Find(projectId);
-        foreach (var file in files)
-        {
-            projeto.Imagens.Add(new Image()
-            {
-                Descricao = file.FileName,
-                Url = await ImagemService.AddImageStorage(file.OpenReadStream(), file.ContentType)
-            });
-        }
-        context.Projetos.Update(projeto);
-        context.SaveChanges();
-        return Ok();
-    }
-    public async Task<IActionResult> RemoveImage(int id)
-    {
-        Image? imagem = context.Imagens.Find(id);
-        await ImagemService.DeleteImageStorage(imagem.Url);
-        context.Imagens.Remove(imagem);
-        context.SaveChanges();
-        return Ok();
-    }*/
 }

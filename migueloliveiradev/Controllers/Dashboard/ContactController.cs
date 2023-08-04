@@ -17,22 +17,36 @@ public class ContactController : Controller
         repository.Create(contact);
         return View();
     }
+    [Route("dashboard/contacts/")]
+    public IActionResult Home(string? query, Status? status)
+    {
+        //create query to search
+        IEnumerable<Contact> contatos = repository.GetQueryFilter(query, status);
+        return View("Views/Dashboard/Contacts/Home.cshtml", contatos);
+    }
+
     [Route("dashboard/contacts/{id}/edit/mask_as_read")]
-    public IActionResult Visible(int id)
+    public IActionResult Read(int id)
     {
         repository.MaskAsRead(id);
-        return Ok();
+        return RedirectToAction("Home", "Contact");
     }
-    [Route("dashboard/contacts/{id}/delete")]
-    public IActionResult Delete(int id)
+    [Route("dashboard/contacts/{id}/edit/mask_as_unread")]
+    public IActionResult Unread(int id)
     {
-        repository.Delete(id);
-        return Ok();
+        repository.MaskAsUnread(id);
+        return RedirectToAction("Home", "Contact");
     }
     [Route("dashboard/contacts/{id}/edit/mask_as_answered")]
     public IActionResult Answered(int id)
     {
         repository.MaskAsAnswered(id);
-        return Ok();
+        return RedirectToAction("Home", "Contact");
+    }
+    [Route("dashboard/contacts/{id}/edit/mask_as_discard")]
+    public IActionResult Discard(int id)
+    {
+        repository.MaskAsDiscarded(id);
+        return RedirectToAction("Home", "Contact");
     }
 }

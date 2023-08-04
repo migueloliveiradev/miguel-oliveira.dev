@@ -12,23 +12,26 @@ public class TechnologyController : Controller
     }
 
     [Route("dashboard/technologies")]
-    public IActionResult Technologies()
+    public IActionResult Home()
     {
         IEnumerable<Technology> technologies = repository.GetAllWithProjects();
-        return View(technologies);
+        return View("Views/Dashboard/Technology/Home.cshtml", technologies);
     }
+
     [HttpPost(), Route("dashboard/technologies/create")]
     public IActionResult Create(Technology technology)
     {
         repository.Create(technology);
-        return RedirectToAction("Technology", "Dashboard");
+        return RedirectToAction("Home", "Technology");
     }
+
     [HttpPost(), Route("dashboard/technologies/edit")]
     public IActionResult Edit(Technology technology)
     {
 
         return RedirectToAction("Technology", "Dashboard");
     }
+
     [Route("dashboard/technologies/delete/{id}")]
     public IActionResult Delete(int id)
     {

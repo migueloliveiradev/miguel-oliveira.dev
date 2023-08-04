@@ -11,18 +11,29 @@ public class SocialController : Controller
     {
         this.repository = repository;
     }
+
+    [Route("dashboard/socials")]
+    public IActionResult Home()
+    {
+        IEnumerable<SocialNetwork> socials = repository.GetAll();
+        return View("Views/Dashboard/Social/Home.cshtml", socials);
+    }
+
+
     [HttpPost("dashboard/social/create")]
     public IActionResult Create(SocialNetwork social)
     {
         repository.Create(social);
         return RedirectToAction("Social", "Dashboard");
     }
+
     [HttpPost("dashboard/social/edit")]
     public IActionResult Edit(SocialNetwork social)
     {
         repository.Update(social);
         return RedirectToAction("Social", "Dashboard");
     }
+
     [Route("dashboard/social/{id}/delete")]
     public IActionResult Delete(int id)
     {
