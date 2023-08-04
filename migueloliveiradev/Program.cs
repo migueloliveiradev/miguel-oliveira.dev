@@ -1,3 +1,5 @@
+using Hangfire;
+using Hangfire.MemoryStorage;
 using migueloliveiradev.Config;
 
 namespace migueloliveiradev;
@@ -9,6 +11,7 @@ public class Program
         WebApplicationBuilder builder = WebApplication.CreateBuilder();
         builder.Services.AddRazorPages();
         builder.Services.AddControllersWithViews().AddRazorRuntimeCompilation();
+        builder.Services.AddHangfire(x => x.UseMemoryStorage());
 
         builder.Services.ConfigureDbContext(builder.Configuration);
         builder.Services.ConfigureIdentity();
@@ -27,6 +30,9 @@ public class Program
         app.UseStaticFiles();
 
         app.UseRouting();
+
+        app.UseHangfireDashboard();
+        BackgroundJobServer server = new();
 
         app.UseAuthorization();
         app.MapControllers();
