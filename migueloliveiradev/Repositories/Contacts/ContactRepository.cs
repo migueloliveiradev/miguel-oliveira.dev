@@ -17,6 +17,22 @@ public class ContactRepository : IContactRepository
     {
         return context.Contacts.Find(id);
     }
+    public IEnumerable<Contact> GetQueryFilter(string? query, Status? status)
+    {
+        IQueryable<Contact> contactsQuery = context.Contacts.AsQueryable();
+
+        if (!string.IsNullOrEmpty(query))
+        {
+            contactsQuery = contactsQuery.Where(c => c.Name.Contains(query) || c.Email.Contains(query) || c.Subject.Contains(query) || c.Message.Contains(query));
+        }
+
+        if (status.HasValue)
+        {
+            contactsQuery = contactsQuery.Where(c => c.Status == status.Value);
+        }
+
+        return contactsQuery.ToList();
+    }
 
     public IEnumerable<Contact> GetAll()
     {
@@ -71,6 +87,14 @@ public class ContactRepository : IContactRepository
     public void MaskAsAnswered(int id)
     {
         context.Contacts.Where(p => p.Id == id).ExecuteUpdate(c => c.SetProperty(p => p.Status, Status.Answered));
+    }
+    public void MaskAsUnread(int id)
+    {
+        context.Contacts.Where(p => p.Id == id).ExecuteUpdate(c => c.SetProperty(p => p.Status, Status.Unread));
+    }
+    public void MaskAsDiscarded(int id)
+    {
+        context.Contacts.Where(p => p.Id == id).ExecuteUpdate(c => c.SetProperty(p => p.Status, Status.Discarded));
     }
 
     public void Delete(int id)

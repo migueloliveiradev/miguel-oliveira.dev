@@ -87,6 +87,14 @@ public class ProjectsRepository : IProjectsRepository
         context.SaveChanges();
     }
 
+    public void RemoveTechnology(int id, int id_technology)
+    {
+        Project project = context.Projects.Where(p => p.Id == id).First();
+        Technology technology = context.Technologies.Where(t => t.Id == id_technology).First();
+        project.Technologies.Remove(technology);
+        context.SaveChanges();
+    }
+
     public void Delete(int id)
     {
         context.Projects.Where(p => p.Id == id).ExecuteDelete();

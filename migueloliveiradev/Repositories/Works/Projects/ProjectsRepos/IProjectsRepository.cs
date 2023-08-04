@@ -20,5 +20,6 @@ public interface IProjectsRepository
     void Create(Project project);
     void Update(Project project);
     void AddTechnology(int id, int id_technology);
+    void RemoveTechnology(int id, int id_technology);
     void Delete(int id);
 }
