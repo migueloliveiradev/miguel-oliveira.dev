@@ -17,12 +17,12 @@ public class Contact
 }
 public enum Status
 {
-    [Display(Name = "Não lidos")]
+    [Display(Name = "Não lido")]
     Unread,
-    [Display(Name = "Lidos")]
+    [Display(Name = "Lido")]
     Read,
-    [Display(Name = "Respondidos")]
+    [Display(Name = "Respondido")]
     Answered,
-    [Display(Name = "Descartados")]
+    [Display(Name = "Descartado")]
     Discarded
 }
