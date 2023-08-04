@@ -1,11 +1,16 @@
 ﻿.card {
-    height: 250px;
-    border: none;
     border-radius: 10px;
+    background-color: #FAF3F0 !important;
+}
+.card > * .form-control {
+    background-color: transparent !important;
+}
+.card-custom {
+    min-height: 250px;
+    border: none;
 }
 
 .cards {
-    margin-top: 1rem;
     display: grid;
     grid-template-columns: repeat(1, 1fr);
     grid-gap: 1rem;
@@ -14,4 +19,7 @@
     .cards {
         grid-template-columns: repeat(2, 1fr);
     }
+}
+.me-10{
+    margin-right: 10rem;
 }
