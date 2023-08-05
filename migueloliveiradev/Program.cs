@@ -16,6 +16,7 @@ public class Program
         builder.Services.ConfigureDbContext(builder.Configuration);
         builder.Services.ConfigureIdentity();
         builder.Services.ConfigureDependencyInjection();
+        builder.Services.ConfigureWebOptimizer();
         builder.ConfigureEnvironmentVariables();
 
         WebApplication app = builder.Build();
@@ -36,6 +37,7 @@ public class Program
 
         app.UseAuthorization();
         app.MapControllers();
+        app.UseWebOptimizer();
         app.MapRazorPages();
         app.MapControllerRoute(
             name: "default",

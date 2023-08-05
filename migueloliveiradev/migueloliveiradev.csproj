@@ -9,6 +9,17 @@
 	</PropertyGroup>
 
 	<ItemGroup>
+	  <Compile Remove="wwwroot\css\dashboard\portfolio\**" />
+	  <Compile Remove="wwwroot\css\site\**" />
+	  <Content Remove="wwwroot\css\dashboard\portfolio\**" />
+	  <Content Remove="wwwroot\css\site\**" />
+	  <EmbeddedResource Remove="wwwroot\css\dashboard\portfolio\**" />
+	  <EmbeddedResource Remove="wwwroot\css\site\**" />
+	  <None Remove="wwwroot\css\dashboard\portfolio\**" />
+	  <None Remove="wwwroot\css\site\**" />
+	</ItemGroup>
+
+	<ItemGroup>
 		<_WebToolingArtifacts Remove="Properties\launchSettingsExample.json" />
 	</ItemGroup>
 
@@ -23,6 +34,7 @@
 	<ItemGroup>
 		<PackageReference Include="Hangfire.AspNetCore" Version="1.8.4" />
 		<PackageReference Include="Hangfire.MemoryStorage" Version="1.8.0" />
+		<PackageReference Include="LigerShark.WebOptimizer.Core" Version="3.0.384" />
 		<PackageReference Include="Microsoft.AspNetCore.Identity.EntityFrameworkCore" Version="7.0.9" />
 		<PackageReference Include="Microsoft.AspNetCore.Identity.UI" Version="7.0.9" />
 		<PackageReference Include="Microsoft.AspNetCore.Mvc.Razor.RuntimeCompilation" Version="7.0.9" />
@@ -49,8 +61,6 @@
 
 	<ItemGroup>
 		<Folder Include="Views\Dashboard\Components\Dashboard\Project\" />
-		<Folder Include="wwwroot\css\dashboard\portfolio\" />
-		<Folder Include="wwwroot\css\site\" />
 	</ItemGroup>
 
 </Project>

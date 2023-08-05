@@ -5,29 +5,27 @@
 <head>
     <meta name="viewport" content="width=device-width" />
     <title>Dashboard - @ViewData["title"]</title>
-    <link rel="stylesheet" href="~/lib/bootstrap/css/bootstrap.min.css" />
-    <link rel="stylesheet" href="~/lib/font-awesome/css/all.min.css" />
-    <link rel="stylesheet" href="~/css/dashboard/table.css" />
-    <link rel="stylesheet" href="~/css/dashboard/cards.css" />
-    <script src="~/lib/vue/vue.global.js"></script>
+    <link rel="stylesheet" href="~/css/all.min.css" asp-append-version="true" />
+
+    <style>
+        .nav-link i {
+            width: 20px;
+        }
+
+        .nav-link span {
+            width: 100px;
+        }
+
+        .container-custom {
+            margin-left: 300px;
+        }
+
+        body {
+            background-color: #0466c8
+        }
+    </style>
 </head>
-<style>
-    .nav-link i {
-        width: 20px;
-    }
 
-    .nav-link span {
-        width: 100px;
-    }
-
-    .container-custom {
-        margin-left: 300px;
-    }
-
-    body {
-        background-color: #0466c8
-    }
-</style>
 <body>
     <div class="container-fluid d-flex flex-row p-0 ">
         <div class="d-flex flex-column position-fixed flex-shrink-0 vh-100 p-3 text-white" style="width: 300px; background-color: #000814;">
@@ -92,8 +90,7 @@
                 @RenderBody()
             </main>
         </div>
-        <script src="~/lib/bootstrap/js/bootstrap.min.js"></script>
-        <script src="~/lib/axios/axios.min.js"></script>
+        <script src="~/js/all.min.js" asp-append-version="true"></script>
     </div>
 </body>
 </html>
