@@ -7,16 +7,8 @@
       "destination": "wwwroot/lib/bootstrap/"
     },
     {
-      "library": "font-awesome@6.4.0",
+      "library": "font-awesome@6.4.2",
       "destination": "wwwroot/lib/font-awesome/"
-    },
-    {
-      "library": "vue@3.3.4",
-      "destination": "wwwroot/lib/vue/"
-    },
-    {
-      "library": "axios@1.4.0",
-      "destination": "wwwroot/lib/axios/"
     }
   ]
 }
