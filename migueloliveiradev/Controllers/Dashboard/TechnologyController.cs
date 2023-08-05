@@ -1,8 +1,11 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Mvc;
 using migueloliveiradev.Models.Works;
 using migueloliveiradev.Repositories.Works.Projects.Technologies;
 
 namespace migueloliveiradev.Controllers.Dashboard;
+
+[Authorize]
 public class TechnologyController : Controller
 {
     private readonly ITechnologyRepository repository;

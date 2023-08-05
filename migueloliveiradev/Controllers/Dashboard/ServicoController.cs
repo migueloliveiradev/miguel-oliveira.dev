@@ -1,9 +1,11 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Mvc;
 using migueloliveiradev.Models.Works;
 using migueloliveiradev.Repositories.Works.Services;
 
 namespace migueloliveiradev.Controllers.Dashboard;
 
+[Authorize]
 public class ServicoController : Controller
 {
     private readonly IServiceRepository repository;

@@ -8,7 +8,6 @@ public static class Database
     public static IServiceCollection ConfigureDbContext(this IServiceCollection services)
     {
         string connection = Environment.GetEnvironmentVariable("MYSQL_CONNECTION")!;
-        Console.WriteLine($"Connection: {connection}");
         services.AddDbContext<DatabaseUsersContext>(options =>
         {
             options.UseMySql(connection, ServerVersion.AutoDetect(connection));

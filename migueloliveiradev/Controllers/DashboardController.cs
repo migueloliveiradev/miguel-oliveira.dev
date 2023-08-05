@@ -9,7 +9,7 @@ using migueloliveiradev.ViewsModel;
 
 namespace migueloliveiradev.Controllers;
 
-//[Authorize]
+[Authorize]
 public class DashboardController : Controller
 {
     private readonly SignInManager<IdentityUser> signInManager;
@@ -31,7 +31,7 @@ public class DashboardController : Controller
     public async Task<IActionResult> Login(Usuario usuario, bool lembrar)
     {
         await signInManager.PasswordSignInAsync(usuario.Username, usuario.Senha, lembrar, false);
-        return RedirectToAction("Login", "Dashboard");
+        return RedirectToAction("Home", "Dashboard");
     }
     public IActionResult Home()
     {

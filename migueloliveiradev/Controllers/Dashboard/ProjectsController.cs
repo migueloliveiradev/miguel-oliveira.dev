@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Mvc;
 using migueloliveiradev.Database;
 using migueloliveiradev.Models.Works;
 using migueloliveiradev.Models.Works.Projetos;
@@ -7,6 +8,7 @@ using migueloliveiradev.Services.Project;
 
 namespace migueloliveiradev.Controllers.Dashboard;
 
+[Authorize]
 public class ProjectsController : Controller
 {
     private readonly IProjectsRepository repository;

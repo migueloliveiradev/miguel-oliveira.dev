@@ -20,6 +20,7 @@ public class Program
         builder.Services.ConfigureWebOptimizer();
 
         WebApplication app = builder.Build();
+        app.ConfigureUserIdentity();
         app.ApplyMigrations();
 
         if (!app.Environment.IsDevelopment())

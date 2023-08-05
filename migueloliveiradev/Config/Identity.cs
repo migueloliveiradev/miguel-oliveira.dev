@@ -41,4 +41,22 @@ public static class Identity
 
         return services;
     }
+
+    public static async void ConfigureUserIdentity(this WebApplication app)
+    {
+        using IServiceScope scope = app.Services.CreateScope();
+        UserManager<IdentityUser> userManager = scope.ServiceProvider.GetRequiredService<UserManager<IdentityUser>>();
+        if (!userManager.Users.Any())
+        {
+            IdentityUser user = new(Environment.GetEnvironmentVariable("DEFAULT_USERNAME")!)
+            {
+                Email = Environment.GetEnvironmentVariable("DEFAULT_EMAIL")!,
+                EmailConfirmed = true,
+            };
+           var re = await userManager.CreateAsync(
+                user,
+                Environment.GetEnvironmentVariable("DEFAULT_PASSWORD")!);   
+            Console.WriteLine(re);
+        }
+    }
 }

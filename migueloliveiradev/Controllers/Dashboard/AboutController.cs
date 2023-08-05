@@ -1,9 +1,11 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Mvc;
 using migueloliveiradev.Models.Me;
 using migueloliveiradev.Repositories.Abouts;
 
 namespace migueloliveiradev.Controllers.Dashboard;
 
+[Authorize]
 public class AboutController : Controller
 {
     private readonly IAboutRepository repository;
