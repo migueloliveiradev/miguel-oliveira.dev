@@ -9,10 +9,9 @@ public static class EnvironmentVariables
             Console.WriteLine("File .env not found");
             return;
         }
-        foreach (string line in File.ReadAllLines(".env"))
+        foreach (string line in File.ReadAllLines(".env").Where(p => !p.StartsWith('#') || string.IsNullOrWhiteSpace(p)))
         {
-            string[] parts = line.Split('=', StringSplitOptions.RemoveEmptyEntries);
-
+            string[] parts = line.Split('=', 2, StringSplitOptions.RemoveEmptyEntries);
             if (parts.Length != 2)
                 continue;
 
