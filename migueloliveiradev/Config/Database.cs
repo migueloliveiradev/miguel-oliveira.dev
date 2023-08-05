@@ -5,9 +5,10 @@ namespace migueloliveiradev.Config;
 
 public static class Database
 {
-    public static IServiceCollection ConfigureDbContext(this IServiceCollection services, ConfigurationManager config)
+    public static IServiceCollection ConfigureDbContext(this IServiceCollection services)
     {
-        string connection = config.GetConnectionString("MYSQL_CONNECTION")!;
+        string connection = Environment.GetEnvironmentVariable("MYSQL_CONNECTION")!;
+        Console.WriteLine($"Connection: {connection}");
         services.AddDbContext<DatabaseUsersContext>(options =>
         {
             options.UseMySql(connection, ServerVersion.AutoDetect(connection));
@@ -21,5 +22,16 @@ public static class Database
         });
 
         return services;
+    }
+
+    public static WebApplication ApplyMigrations(this WebApplication app)
+    {
+        using IServiceScope scope = app.Services.CreateScope();
+        DatabaseContext context = scope.ServiceProvider.GetRequiredService<DatabaseContext>();
+        context.Database.Migrate();
+        DatabaseUsersContext usersContext = scope.ServiceProvider.GetRequiredService<DatabaseUsersContext>();
+        usersContext.Database.Migrate();
+
+        return app;
     }
 }

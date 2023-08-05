@@ -13,13 +13,14 @@ public class Program
         builder.Services.AddControllersWithViews().AddRazorRuntimeCompilation();
         builder.Services.AddHangfire(x => x.UseMemoryStorage());
 
-        builder.Services.ConfigureDbContext(builder.Configuration);
+        builder.ConfigureEnvironmentVariables();
+        builder.Services.ConfigureDbContext();
         builder.Services.ConfigureIdentity();
         builder.Services.ConfigureDependencyInjection();
         builder.Services.ConfigureWebOptimizer();
-        builder.ConfigureEnvironmentVariables();
 
         WebApplication app = builder.Build();
+        app.ApplyMigrations();
 
         if (!app.Environment.IsDevelopment())
         {
