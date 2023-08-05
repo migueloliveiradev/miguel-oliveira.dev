@@ -13,8 +13,22 @@ COPY . .
 WORKDIR "/src/migueloliveiradev"
 RUN dotnet build "migueloliveiradev.csproj" -c Release -o /app/build
 
+RUN dotnet tool install --global dotnet-ef
+ENV PATH="$PATH:/root/.dotnet/tools"
+RUN dotnet ef database update
+
 FROM build AS publish
-RUN dotnet publish "migueloliveiradev.csproj" -c Release -o /app/publish /p:UseAppHost=false
+RUN dotnet publish "migueloliveiradev.csproj" -c Release -o /app/publish
+
+
+# Install the agent
+RUN apt-get update && apt-get install -y wget ca-certificates gnupg \
+    && echo 'deb http://apt.newrelic.com/debian/ newrelic non-free' | tee /etc/apt/sources.list.d/newrelic.list \
+    && wget https://download.newrelic.com/548C16BF.gpg \
+    && apt-key add 548C16BF.gpg \
+    && apt-get update \
+    && apt-get install -y 'newrelic-dotnet-agent' \
+    && rm -rf /var/lib/apt/lists/*
 
 FROM base AS final
 WORKDIR /app
