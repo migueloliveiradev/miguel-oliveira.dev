@@ -20,7 +20,9 @@
    - Estruturação para paginas
    - Identificação de usuario e acessos
  - [Entity Framework Core](https://learn.microsoft.com/en-us/ef/core/)
-   * Mapeador de relação de objeto para consultas, controle de alterações, atualizações e migrações com banco de dados
+   - Mapeador de relação de objeto para consultas, controle de alterações, atualizações e migrações com banco de dados
+ - [New Relic](https://newrelic.com)
+   - Monitoramento da aplicação
  - [MySQL](https://www.mysql.com)
    - Sistema de gerenciamento de banco de dados, que utiliza a linguagem SQL como interface.
  - [Docker](https://www.docker.com)
