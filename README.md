@@ -3,7 +3,7 @@
 [![Status](https://img.shields.io/badge/em-desenvolvimento-orange?style=for-the-badge)](#)
 [![wakatime](https://wakatime.com/badge/user/4ea4d323-1f7a-46e1-a08e-2080b1b95450/project/ab90eef6-170c-4d20-921d-2da07111a8fc.svg?style=for-the-badge)](https://wakatime.com/@eimigueloliveir)
 
-## Esse projeto consiste em um portfolio com dashboard administrativa contendo os seguintes itens abaixo
+## O projeto consiste em um portfolio com dashboard administrativa contendo os seguintes itens
 - Redes Sociais
 - Tecnologias
 - Informações de resumo
@@ -15,7 +15,7 @@
 - Relatorios
 
 
-## Tecnologias usadas
+## Tecnologias e ferramentas usadas
  - [ASP.NET Core MVC](https://learn.microsoft.com/pt-br/aspnet/core/mvc/overview?view=aspnetcore-7.0)
    - Estruturação para paginas
    - Identificação de usuario e acessos
