@@ -35,3 +35,7 @@
    - Nuvem para host da aplicação e banco de dados
  - [CloudFlare](https://www.cloudflare.com/pt-br/)
    - Rede global de CDN e proxy para segurança e otimização de entrega
+ - [Bootstrap](https://getbootstrap.com)
+   - Framework front-end para estilização e componentes
+ - [Font Awesome](https://fontawesome.com)
+   - Biblioteca front-end de icones modernos
