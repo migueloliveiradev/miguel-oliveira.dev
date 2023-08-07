@@ -9,7 +9,6 @@ namespace migueloliveiradev.Database;
 public class DatabaseContext : DbContext
 {
     public DatabaseContext(DbContextOptions<DatabaseContext> options) : base(options) { }
-    public DatabaseContext() { }
 
     public DbSet<Project> Projects { get; set; }
     public DbSet<Technology> Technologies { get; set; }

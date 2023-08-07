@@ -12,7 +12,6 @@ public class ImageConverter : IImageConverter
     }
     public async Task ConverterToWebp(byte[] file, string contentType, string file_name)
     {
-        Console.WriteLine("Convertendo para webp");
         using var fileStream = new MemoryStream(file);
         using Image image = await Image.LoadAsync(fileStream);
         using MemoryStream fileWebp = new();
