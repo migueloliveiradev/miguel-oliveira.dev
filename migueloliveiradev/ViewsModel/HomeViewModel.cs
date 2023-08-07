@@ -7,7 +7,7 @@ namespace migueloliveiradev.ViewsModel;
 
 public class HomeViewModel
 {
-    public IEnumerable<SocialNetwork> Networks { get; set; }
+    public IEnumerable<SocialNetwork> SocialNetworks { get; set; }
     public About? About { get; set; }
     public IEnumerable<Project> Projects { get; set; }
     public IEnumerable<Service> Services { get; set; }
