@@ -1,0 +1,42 @@
+﻿@using migueloliveiradev.Models.Works.Projetos;
+@using migueloliveiradev.Models.Works;
+
+@model (Project project, IEnumerable<Technology> technologies)
+@{
+    Layout = "_LayoutDashboard";
+}
+<div class="card m-3">
+    <div class="card-body">
+        <h5 class="card-title">@Model.project.Titulo</h5>
+        <div class="card-body ">
+            <div class="border p-3">
+                <h3 class="form-label">Tecnologias cadastradas</h3>
+                @foreach (Technology tech in Model.project.Technologies)
+                {
+                    <div class="technologies">
+                        <span>@tech.Nome</span>
+                        <a asp-action="RemoveTechnology" asp-controller="Projects" asp-route-id="@Model.project.Id" asp-route-id_tech="@tech.Id"><i class="fa-solid fa-minus"></i></a>
+                    </div>
+                }
+                @if(Model.project.Technologies.Count() == 0)
+                {
+                   <br/> <span>Nenhuma tecnologia cadastrada</span>
+                }
+            </div>
+            <div class="border p-3">
+                <h3 class="form-label">Tecnologias não cadastradas</h3>
+                @foreach (Technology tech in Model.technologies)
+                {
+                    <div class="technologies">
+                        <span>@tech.Nome</span>
+                        <a asp-action="AddTechnology" asp-controller="Projects" asp-route-id="@Model.project.Id" asp-route-id_tech="@tech.Id"><i class="fa-solid fa-plus"></i></a>
+                    </div>
+                }
+                @if (Model.technologies.Count() == 0)
+                {
+                    <span>Nenhuma categoria disponivel</span>
+                }
+            </div>
+        </div>
+    </div>
+</div>

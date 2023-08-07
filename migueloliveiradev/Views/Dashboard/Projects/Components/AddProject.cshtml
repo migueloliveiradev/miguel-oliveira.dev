@@ -1,0 +1,48 @@
+﻿@using migueloliveiradev.Models.Works.Projetos;
+@model Project
+
+<div class="modal fade" id="ModalNewProject" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-xl">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h1 class="modal-title fs-5" id="exampleModalLabel">Novo Projeto</h1>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <form asp-action="Create" asp-controller="Projeto">
+                <div class="modal-body">
+
+                    <div class="mb-3">
+                        <label class="form-label">Titulo</label>
+                        <input asp-for="Titulo" type="text" class="form-control" placeholder="Escreva o titulo do projeto" id="input-title" required />
+                    </div>
+                    <div class="mb-3">
+                        <label class="form-label">Subtitulo</label>
+                        <input asp-for="SubTitulo" type="text" class="form-control" placeholder="Escreva o subtitulo do projeto" id="input-subject" required />
+                    </div>
+                    <div class="mb-3">
+                        <label class="form-label">Descrição</label>
+                        <textarea asp-for="Descricao" class="form-control" placeholder="Escreva a descrição do projeto" id="input-description" required style="height: 130px;"></textarea>
+                    </div>
+                    <div class="mb-3">
+                        <label class="form-label">Url</label>
+                        <input asp-for="Url" type="text" class="form-control" placeholder="Escreva a url do projeto" id="input-url" />
+                    </div>
+                    <div class="mb-3">
+                        <label class="form-label">Url Linkedin</label>
+                        <input asp-for="UrlLinkedin" type="text" class="form-control" placeholder="Escreva a url do linkedin do projeto" id="input-url-linkedin" />
+                    </div>
+                    <div>
+                        <label class="form-label">Url Github</label>
+                        <input asp-for="UrlGithub" type="text" class="form-control" placeholder="Escreva a url do github do projeto" id="input-url-github" />
+                    </div>
+                   
+                </div>
+
+                <div class="modal-footer">
+                    <button type="reset" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                    <button type="submit" class="btn btn-primary">Salvar</button>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>

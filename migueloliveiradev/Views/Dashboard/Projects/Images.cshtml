@@ -1,0 +1,46 @@
+﻿@using migueloliveiradev.Models.Works.Projetos;
+@model Project
+@{
+    Layout = "_LayoutDashboard";
+}
+<div class="card m-3">
+    <div class="card-body">
+        <ul class="list-group">
+            @foreach (var image in Model.Images)
+            {
+                <li class="list-group-item d-flex justify-content-between">
+                    <div class="d-flex">
+                        <img class="img-thumbnail w-25" src="@image.Url" alt="teste">
+                        <p class="ms-3">@image.Description</p>
+                    </div>
+                    <div>
+                        <a asp-action="DeleteImage" asp-controller="Projects" asp-route-id="@Model.Id" asp-route-idImage="@image.Id" class="btn btn-danger my-1">Excluir</a>
+                    </div>
+                </li>
+            }
+        </ul>
+        <form class="mt-3" asp-action="UploadImages" asp-controller="Projects" asp-route-id="@Model.Id" enctype="multipart/form-data">
+            <div class="input-group mb-3">
+                <input type="file" class="form-control" accept="image/*" name="file" onchange="previewImg(this)" aria-label="Upload" required>
+            </div>
+            <img id="img-preview" alt="your image" class="w-50 mb-3 img-thumbnail" style="display: none;" />
+            <div class="input-group mb-3">
+                <input class="form-control" name="description" placeholder="Escreva a descrição da imagem" id="input-description" required />
+                <button type="submit" class="btn btn-primary">Enviar</button>
+            </div>
+        </form>
+    </div>
+</div>
+<script>
+    const img = document.getElementById('img-preview');
+
+    function previewImg(event){
+        console.log(event);
+        const file = event.files[0];
+        console.log(file);
+
+        let imgURL = URL.createObjectURL(file);
+        img.style.display = "block";
+        img.src = imgURL;
+    }
+</script>

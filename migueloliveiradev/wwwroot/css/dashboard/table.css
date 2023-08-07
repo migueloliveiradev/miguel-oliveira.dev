@@ -1,0 +1,7 @@
+﻿.table > :not(caption) > * > * {
+    background-color: transparent !important;
+}
+
+.nav-link.active {
+    background-color: #0466c8 !important;
+}

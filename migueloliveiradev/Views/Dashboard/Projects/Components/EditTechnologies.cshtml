@@ -1,0 +1,34 @@
+﻿@using migueloliveiradev.Models.Works.Projetos;
+@model Project
+@{
+}
+
+<div class="modal fade" id="modalEditTechnologies" ref="EditTechnologies" data-bs-backdrop="static" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h1 class="modal-title fs-5" id="exampleModalLabel">Tecnologias</h1>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                <div class="d-flex">
+                    <select :disabled="technologies.length == 0" class="form-select" v-model="selected">
+                        <option v-if="technologies.length === 0" value="" selected>Todas tecnologias selecionadas</option>
+                        <option v-for="(tech, index) in technologies" :value="tech.id">{{ tech.nome }}</option>
+                    </select>
+                    <button class="btn btn-primary mr-3" v-on:click="AddTech()">Adicionar</button>
+                </div>
+                <div>
+                    <a class="btn btn-success mt-3 ms-1" v-for="tech in technologiesSelected">
+                        {{ tech.nome }}
+                    </a>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal" v-on:click="clear()">Close</button>
+                <button type="button" class="btn btn-primary" data-bs-dismiss="modal" v-on:click="salvar()">Salvar</button>
+            </div>
+        </div>
+    </div>
+</div>
+<script src="/js/dashboard/projects/edit_tecnologies.js"></script>

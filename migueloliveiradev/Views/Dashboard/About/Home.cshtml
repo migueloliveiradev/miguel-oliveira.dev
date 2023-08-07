@@ -1,0 +1,28 @@
+﻿@using migueloliveiradev.Models.Me;
+@model About
+@{
+    Layout = "_LayoutDashboard";
+    ViewData["title"] = "Sobre";
+}
+<nav class="navbar navbar-expand-lg bg-body-tertiary" style="width: 100%; background-color: #000814 !important;">
+    <p class="navbar-brand text-light p-0 m-3">Cadastro de informações do sobre</p>
+</nav>
+<div class="p-3">
+    <div class="card">
+
+        <form asp-action="AddEdit" asp-controller="About" class="card-body">
+            <input type="hidden" asp-for="Id" />
+            <div class="mb-3">
+                <label class="form-label">Titulo</label>
+                <input class="form-control" asp-for="Title" placeholder="Escreva um titulo aqui." id="floatingTextarea1" />
+            </div>
+            <div class="mb-3">
+                <label class="form-label">Descrição</label>
+                <textarea class="form-control" asp-for="Description" placeholder="Escreva uma descrição aqui." id="floatingTextarea2" style="height: 100px"></textarea>
+            </div>
+            <div class="ms-auto">
+                <button type="submit" class="btn btn-primary mt-2">Salvar</button>
+            </div>
+        </form>
+    </div>
+</div>

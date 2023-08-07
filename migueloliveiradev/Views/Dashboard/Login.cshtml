@@ -10,13 +10,13 @@
     <link rel="stylesheet" href="~/lib/bootstrap/css/bootstrap.min.css" />
     <link rel="stylesheet" href="~/css/dashboard/login.css" />
 </head>
-<body>
+<body class="class-body">
 
     <div class="container" style="height: 100vh">
         <main role="main" id="main" class="pb-3">
             <div class="login-box">
                 <h2>Login</h2>
-                <form asp-action="Login" asp-controller="Dashboard" method="post">
+                <form asp-action="Login" asp-controller="Dashboard" asp-route-ReturnUrl="@Context.Request.Query["ReturnUrl"]" method="post">
                     <div class="user-box">
                         <input type="text" asp-for="Username" required>
                         <label>Username</label>

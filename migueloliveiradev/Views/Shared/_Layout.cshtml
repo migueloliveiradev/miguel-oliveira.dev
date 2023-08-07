@@ -1,28 +1,26 @@
-﻿<!DOCTYPE html>
+﻿@using migueloliveiradev.ViewsModel;
+@model HomeViewModel
+<!DOCTYPE html>
 <html lang="pt">
 <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>@ViewData["Title"] - migueloliveiradev</title>
-    <link rel="stylesheet" href="~/lib/bootstrap/css/bootstrap.min.css" />
-    <link rel="stylesheet" href="~/lib/font-awesome/css/all.min.css" />
-    <link rel="stylesheet" href="~/css/site.css" asp-append-version="true" />
-    <link rel="stylesheet" href="~/migueloliveiradev.styles.css" asp-append-version="true" />
+    <title>Miguel Oliveira - Desenvolvedor Full Stack</title>
+    <link rel="stylesheet" href="~/css/all.min.css" asp-append-version="true" />
 </head>
 <body>
     <i class="bi bi-list mobile-nav-toggle d-xl-none"></i>
-
     <header id="header">
         <div class="d-flex flex-column">
 
             <div class="profile">
                 <img src="/img/profile-img.jpg" alt="" class="img-fluid rounded-circle">
                 <h1 class="text-light">Miguel Oliveira</h1>
-@*                <partial name="~/Views/Home/Partials/_SocialLinks.cshtml" model="@ViewData["social-links"]" />
-*@            </div>
+                <partial name="/Views/Home/Components/SocialLinks.cshtml" model="@Model.SocialNetworks" />
+           </div>
 
             <nav id="navbar" class="nav-menu navbar">
-                <ul>
+                <ul class="w-100">
                     <li><a href="#hero" class="nav-link scrollto active"><i class="bx bx-home"></i> <span>Home</span></a></li>
                     <li><a href="#about" class="nav-link scrollto"><i class="bx bx-user"></i> <span>Sobre</span></a></li>
                     <li><a href="#resume" class="nav-link scrollto"><i class="bx bx-file-blank"></i> <span>Resumo</span></a></li>
@@ -35,7 +33,7 @@
     </header>
 
     <div class="container">
-        <main role="main" id="main" class="pb-3">
+        <main role="main" id="main" class="main-home pb-3">
             @RenderBody()
         </main>
     </div>

@@ -361,3 +361,8 @@ MigrationBackup/
 
 # Fody - auto-generated XML schema
 FodyWeavers.xsd
+/migueloliveiradev/Properties/launchSettings.json
+
+migueloliveiradev/wwwroot/lib/**/*
+migueloliveiradev/wwwroot/img/projects/**/*
+.env

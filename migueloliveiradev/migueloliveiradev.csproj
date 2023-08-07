@@ -1,35 +1,69 @@
 <Project Sdk="Microsoft.NET.Sdk.Web">
 
-  <PropertyGroup>
-    <TargetFramework>net7.0</TargetFramework>
-    <Nullable>enable</Nullable>
-    <ImplicitUsings>enable</ImplicitUsings>
-    <UserSecretsId>c71caa5c-76b0-4ec7-b323-57a0ee0570c1</UserSecretsId>
-    <DockerDefaultTargetOS>Linux</DockerDefaultTargetOS>
-  </PropertyGroup>
+	<PropertyGroup>
+		<TargetFramework>net7.0</TargetFramework>
+		<Nullable>enable</Nullable>
+		<ImplicitUsings>enable</ImplicitUsings>
+		<UserSecretsId>c71caa5c-76b0-4ec7-b323-57a0ee0570c1</UserSecretsId>
+		<DockerDefaultTargetOS>Linux</DockerDefaultTargetOS>
+	</PropertyGroup>
 
-  <ItemGroup>
-    <None Include="..\.editorconfig" Link=".editorconfig" />
-  </ItemGroup>
+	<ItemGroup>
+	  <Compile Remove="wwwroot\css\dashboard\portfolio\**" />
+	  <Compile Remove="wwwroot\css\site\**" />
+	  <Content Remove="wwwroot\css\dashboard\portfolio\**" />
+	  <Content Remove="wwwroot\css\site\**" />
+	  <EmbeddedResource Remove="wwwroot\css\dashboard\portfolio\**" />
+	  <EmbeddedResource Remove="wwwroot\css\site\**" />
+	  <None Remove="wwwroot\css\dashboard\portfolio\**" />
+	  <None Remove="wwwroot\css\site\**" />
+	</ItemGroup>
 
-  <ItemGroup>
-    <PackageReference Include="Microsoft.AspNetCore.Identity.EntityFrameworkCore" Version="7.0.5" />
-    <PackageReference Include="Microsoft.AspNetCore.Identity.UI" Version="7.0.5" />
-    <PackageReference Include="Microsoft.EntityFrameworkCore" Version="7.0.5" />
-    <PackageReference Include="Microsoft.EntityFrameworkCore.InMemory" Version="7.0.5" />
-    <PackageReference Include="Microsoft.EntityFrameworkCore.Tools" Version="7.0.5">
-      <PrivateAssets>all</PrivateAssets>
-      <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
-    </PackageReference>
-    <PackageReference Include="Microsoft.Extensions.Identity.Core" Version="7.0.5" />
-    <PackageReference Include="Microsoft.VisualStudio.Web.CodeGeneration.Design" Version="7.0.6" />
-    <PackageReference Include="OCI.DotNetSDK.Objectstorage" Version="60.0.0" />
-    <PackageReference Include="Pomelo.EntityFrameworkCore.MySql" Version="7.0.0" />
-  </ItemGroup>
+	<ItemGroup>
+		<_WebToolingArtifacts Remove="Properties\launchSettingsExample.json" />
+	</ItemGroup>
 
-  <ItemGroup>
-    <Folder Include="wwwroot\css\dashboard\portfolio\" />
-    <Folder Include="wwwroot\css\site\" />
-  </ItemGroup>
+	<ItemGroup>
+		<Content Include="Properties\launchSettingsExample.json" />
+	</ItemGroup>
+
+	<ItemGroup>
+		<None Include="..\.editorconfig" Link=".editorconfig" />
+	</ItemGroup>
+
+	<ItemGroup>
+		<PackageReference Include="Hangfire.AspNetCore" Version="1.8.4" />
+		<PackageReference Include="Hangfire.Dashboard.Authorization" Version="3.0.1" />
+		<PackageReference Include="Hangfire.MemoryStorage" Version="1.8.0" />
+		<PackageReference Include="LigerShark.WebOptimizer.Core" Version="3.0.384" />
+		<PackageReference Include="Microsoft.AspNetCore.Identity.EntityFrameworkCore" Version="7.0.9" />
+		<PackageReference Include="Microsoft.AspNetCore.Identity.UI" Version="7.0.9" />
+		<PackageReference Include="Microsoft.AspNetCore.Mvc.Razor.RuntimeCompilation" Version="7.0.9" />
+		<PackageReference Include="Microsoft.EntityFrameworkCore" Version="7.0.9" />
+		<PackageReference Include="Microsoft.EntityFrameworkCore.InMemory" Version="7.0.9" />
+		<PackageReference Include="Microsoft.EntityFrameworkCore.Proxies" Version="7.0.9" />
+		<PackageReference Include="Microsoft.EntityFrameworkCore.Tools" Version="7.0.9">
+			<PrivateAssets>all</PrivateAssets>
+			<IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
+		</PackageReference>
+		<PackageReference Include="Microsoft.Extensions.Identity.Core" Version="7.0.9" />
+		<PackageReference Include="Microsoft.VisualStudio.Web.CodeGeneration.Design" Version="7.0.8" />
+		<PackageReference Include="Microsoft.Web.LibraryManager.Build" Version="2.1.175" />
+		<PackageReference Include="OCI.DotNetSDK.Objectstorage" Version="67.0.0" />
+		<PackageReference Include="Pomelo.EntityFrameworkCore.MySql" Version="7.0.0" />
+		<PackageReference Include="SixLabors.ImageSharp" Version="3.0.1" />
+	</ItemGroup>
+
+	<ItemGroup>
+		<Using Remove="SixLabors.ImageSharp" />
+		<Using Remove="SixLabors.ImageSharp.PixelFormats" />
+		<Using Remove="SixLabors.ImageSharp.Processing" />
+	</ItemGroup>
+
+	<ItemGroup>
+		<Folder Include="Views\Dashboard\Components\Dashboard\Project\" />
+		<Folder Include="Views\Home\Partials\" />
+		<Folder Include="Views\Home\Portfolio\" />
+	</ItemGroup>
 
 </Project>

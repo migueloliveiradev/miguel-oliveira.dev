@@ -1,32 +1,45 @@
-﻿using Microsoft.AspNetCore.Mvc;
-using Microsoft.EntityFrameworkCore;
-using migueloliveiradev.Database;
+﻿using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Mvc;
 using migueloliveiradev.Models.Network;
+using migueloliveiradev.Repositories.SocialNetworks;
 
-namespace migueloliveiradev.Controllers.Dashboard
+namespace migueloliveiradev.Controllers.Dashboard;
+
+[Authorize]
+public class SocialController : Controller
 {
-    public class SocialController : Controller
+    private readonly ISocialNetworkRepository repository;
+    public SocialController(ISocialNetworkRepository repository)
     {
-        private readonly DatabaseContext context = new();
-        public IActionResult Create(RedeSocial rede)
-        {
-            context.RedeSociais.Add(rede);
-            context.SaveChanges();
-            return RedirectToAction("Social", "Dashboard");
-        }
-        public IActionResult Edit(RedeSocial rede)
-        {
-            context.RedeSociais.Update(rede);
-            context.SaveChanges();
-            return RedirectToAction("Social", "Dashboard");
-        }
-        public IActionResult Delete(int id)
-        {
-            RedeSocial? rede = context.RedeSociais.Find(id);
-            context.RedeSociais.Remove(rede);
-            context.SaveChanges();
-            return RedirectToAction("Social", "Dashboard");
-        }
+        this.repository = repository;
+    }
 
+    [Route("dashboard/socials")]
+    public IActionResult Home()
+    {
+        IEnumerable<SocialNetwork> socials = repository.GetAll();
+        return View("Views/Dashboard/Social/Home.cshtml", socials);
+    }
+
+
+    [HttpPost("dashboard/social/create")]
+    public IActionResult Create(SocialNetwork social)
+    {
+        repository.Create(social);
+        return RedirectToAction("Social", "Dashboard");
+    }
+
+    [HttpPost("dashboard/social/edit")]
+    public IActionResult Edit(SocialNetwork social)
+    {
+        repository.Update(social);
+        return RedirectToAction("Social", "Dashboard");
+    }
+
+    [Route("dashboard/social/{id}/delete")]
+    public IActionResult Delete(int id)
+    {
+        repository.Delete(id);
+        return RedirectToAction("Social", "Dashboard");
     }
 }

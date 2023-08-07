@@ -1,0 +1,9 @@
+﻿@using migueloliveiradev.Models.Network;
+@model List<SocialNetwork>;
+
+<div class="social-links mt-3 text-center">
+    @foreach (var rede in Model)
+    {
+        <a href="@rede.Url" target="_blank"><i class="@rede.Icon"></i></a>
+    }
+</div>

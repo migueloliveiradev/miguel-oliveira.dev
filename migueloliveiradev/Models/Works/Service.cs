@@ -1,10 +1,9 @@
-﻿namespace migueloliveiradev.Models.Works
+﻿namespace migueloliveiradev.Models.Works;
+
+public class Service
 {
-    public class Service
-    {
-        public int Id { get; set; }
-        public string Title { get; set; }
-        public string Icon { get; set;}
-        public string Description { get; set; }
-    }
+    public int Id { get; set; }
+    public string Title { get; set; }
+    public string Icon { get; set; }
+    public string Description { get; set; }
 }

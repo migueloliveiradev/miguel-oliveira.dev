@@ -1,0 +1,25 @@
+﻿@using migueloliveiradev.Models.Works;
+@model IEnumerable<Technology>
+
+
+
+<section id="skills" class="skills section-bg">
+    <div>
+        <div class="section-title">
+            <h2>Skills</h2>
+            <p>Minhas atuais skills que trabalho</p>
+        </div>
+        <div class="marquee-container">
+            <div class="marquee-content d-flex">
+                @foreach (Technology tech in Model)
+                {
+                    <h1 class="me-3"><span class="badge bg-secondary text-black">@tech.Nome</span></h1>
+                }
+                @foreach (Technology tech in Model)
+                {
+                    <h1 class="me-3"><span class="badge bg-secondary text-black">@tech.Nome</span></h1>
+                }
+            </div>
+        </div>
+    </div>
+</section>

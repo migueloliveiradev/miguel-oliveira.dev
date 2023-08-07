@@ -4,93 +4,93 @@
 <html>
 <head>
     <meta name="viewport" content="width=device-width" />
-    <title>@ViewBag.Title</title>
-    <link rel="stylesheet" href="~/lib/bootstrap/css/bootstrap.min.css" />
-    <link rel="stylesheet" href="~/lib/font-awesome/css/all.min.css" />
-    <script src="~/lib/vue/vue.global.js"></script>
+    <title>Dashboard - @ViewData["title"]</title>
+    <link rel="stylesheet" href="~/css/all.min.css" asp-append-version="true" />
+
+    <style>
+        .nav-link i {
+            width: 20px;
+        }
+
+        .nav-link span {
+            width: 100px;
+        }
+
+        .container-custom {
+            margin-left: 300px;
+        }
+
+        body {
+            background-color: #0466c8
+        }
+    </style>
 </head>
-<style>
-    .nav-link i {
-        width: 20px;
-    }
 
-    .nav-link span {
-        width: 100px;
-    }
-
-    .container-custom {
-        margin-left: 300px;
-    }
-
-    body {
-        background-color: #f4f6f9
-    }
-</style>
 <body>
     <div class="container-fluid d-flex flex-row p-0 ">
-        <div class="d-flex flex-column position-fixed flex-shrink-0 vh-100 p-3 text-white" style="width: 300px; background-color: #040b14;">
+        <div class="d-flex flex-column position-fixed flex-shrink-0 vh-100 p-3 text-white" style="width: 300px; background-color: #000814;">
             <a asp-action="Home" asp-controller="Home" class="d-flex align-items-center text-white text-decoration-none">
                 <span class="fs-4">Miguel Oliveira</span>
             </a>
             <hr>
             <ul class="nav nav-pills flex-column mb-auto">
                 <li class="nav-item">
-                    <a asp-action="Home" asp-controller="Dashboard" class="nav-link active">
+                    <a asp-action="Home" asp-controller="Dashboard" class="nav-link text-white @(ViewContext.RouteData.Values["controller"]?.ToString() == "Dashboard" ? "active" : "")">
                         <i class="fa-solid fa-house mr-2"></i>
                         <span class="ml-2">Home</span>
                     </a>
                 </li>
                 <li>
-                    <a asp-action="Social" asp-controller="Dashboard" class="nav-link text-white">
+                    <a asp-action="Home" asp-controller="Social" class="nav-link text-white @(ViewContext.RouteData.Values["controller"]?.ToString() == "Social" ? "active" : "")">
                         <i class="fa-solid fa-thumbs-up"></i>
                         Social
                     </a>
                 </li>
                 <li>
-                    <a asp-action="Sobre" asp-controller="Dashboard" class="nav-link text-white">
+                    <a asp-action="Home" asp-controller="About" class="nav-link text-white @(ViewContext.RouteData.Values["controller"]?.ToString() == "About" ? "active" : "")">
                         <i class="fa-regular fa-address-card"></i>
                         Sobre
                     </a>
                 </li>
                 <li>
-                    <a asp-action="Skills" asp-controller="Dashboard" class="nav-link text-white">
+                    <a asp-action="Home" asp-controller="Technology" class="nav-link text-white @(ViewContext.RouteData.Values["controller"]?.ToString() == "Technology" ? "active" : "")">
                         <i class="fa-solid fa-wrench"></i>
-                        Skills
+                        Tecnologias
                     </a>
                 </li>
 
                 <li>
-                    <a asp-action="Portfolio" asp-controller="Dashboard" class="nav-link text-white">
+                    <a asp-action="Home" asp-controller="Projects" class="nav-link text-white @(ViewContext.RouteData.Values["controller"]?.ToString() == "Projects" ? "active" : "")">
                         <i class="fa-solid fa-laptop"></i>
-                        Portfolio
+                        Projetos
                     </a>
                 </li>
                  <li>
-                    <a asp-action="Servicos" asp-controller="Dashboard" class="nav-link text-white">
+                    <a asp-action="Servicos" asp-controller="Dashboard" class="nav-link text-white @(ViewContext.RouteData.Values["controller"]?.ToString() == "Services" ? "active" : "")">
                         <i class="fa-solid fa-database"></i>
                         Serviços
                     </a>
                 </li>
                 <li>
-                    <a asp-action="Contatos" asp-controller="Dashboard" class="nav-link text-white">
+                    <a asp-action="Home" asp-controller="Contact" class="nav-link text-white @(ViewContext.RouteData.Values["controller"]?.ToString() == "Contact" ? "active" : "")">
                         <i class="fa-regular fa-comment-dots"></i>
                         Contatos
                     </a>
                 </li>
+                
             </ul>
             <hr>
-            <div class="mb-3">
-                <img src="https://github.com/eimigueloliveir.png" alt="" width="32" height="32" class="rounded-circle me-2">
-                <strong>@User.FindFirst(ClaimTypes.Name)?.Value</strong>
+            <div>
+                <img src="/img/migueloliveira.png" alt="" width="50" height="50" class="rounded-circle me-2">
+                <strong>@(User.FindFirst(ClaimTypes.Name)?.Value ?? "Miguel Oliveira")</strong>
             </div>
         </div>
-        <div class="container-fluid container-custom flex-grow-1">
-            <main role="main" id="main" class="pb-3">
+        <div class="container-fluid container-custom p-0">
+            <main role="main" id="main" class="p-0">
                 @RenderBody()
             </main>
         </div>
-        <script src="~/lib/bootstrap/js/bootstrap.min.js"></script>
-        <script src="~/lib/axios/axios.min.js"></script>
+        <script src="~/js/all.min.js" asp-append-version="true"></script>
     </div>
 </body>
 </html>

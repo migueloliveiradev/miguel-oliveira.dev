@@ -1,0 +1,99 @@
+﻿@using migueloliveiradev.Models.Works.Projetos;
+@model IEnumerable<Project>
+
+<section id="portfolio" class="portfolio section-bg">
+    <div class="section-title">
+        <h2>Portfolio</h2>
+        <p>Alguns trabalhos e projetos pessoais já desenvolvidos.</p>
+    </div>
+    <div class="cards-projects justify-content-center">
+        @foreach (Project project in Model)
+        {
+            <div class="card" data-bs-toggle="modal" data-bs-target="#modalProject-@project.Id">
+                <img src="@(project.Images != null && project.Images.Any() ? project.Images.First().Url : "/img/projeto-exemplo.webp")" class="card-img-top" alt="...">
+                <div class="card-body">
+                    <h5 class="card-title">@project.Titulo</h5>
+                    <p class="card-text">@project.SubTitulo</p>
+                </div>
+            </div>
+        }
+    </div>
+</section>
+
+@foreach (Project project in Model)
+{
+    <div class="modal fade modal-xl" id="modalProject-@project.Id" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h1 class="modal-title fs-5" id="exampleModalLabel">Detalhes do projeto</h1>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body modal-project">
+                    <div class="d-flex">
+                        <div id="carouselExample" class="carousel slide carousel-images-project">
+                            <div class="carousel-indicators">
+                                <button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="0" class="active" aria-current="true" aria-label="Slide 1"></button>
+                                <button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="1" aria-label="Slide 2"></button>
+                                <button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="2" aria-label="Slide 3"></button>
+                            </div>
+                            <div class="carousel-inner">
+                                <div class="carousel-item active">
+                                    <img src="/img/home-bg.jpg" class="d-block w-100" alt="..." />
+                                </div>
+                                <div class="carousel-item">
+                                    <img src="/img/home-bg.jpg" class="d-block w-100" alt="..." />
+                                </div>
+                                <div class="carousel-item">
+                                    <img src="/img/home-bg.jpg" class="d-block w-100" alt="..." />
+                                </div>
+                            </div>
+                            <button class="carousel-control-prev" type="button" data-bs-target="#carouselExample" data-bs-slide="prev">
+                                <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                                <span class="visually-hidden">Previous</span>
+                            </button>
+                            <button class="carousel-control-next" type="button" data-bs-target="#carouselExample" data-bs-slide="next">
+                                <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                                <span class="visually-hidden">Next</span>
+                            </button>
+                        </div>
+                        <div class="m-3 description-project">
+                            <h1>@project.Titulo</h1>
+                            <p>@project.SubTitulo</p>
+                            <p class="card-text">@project.Descricao</p>
+                            <p class="text-end opacity-50">@project.DateStart - @project.DateEnd</p>
+                        </div>
+                    </div>
+                    <div class="d-flex m-3 ms-0">
+                        @if(!string.IsNullOrEmpty(project.Url))
+                        {
+                            <a href="@project.Url" target="_blank" class="d-flex btn btn-primary me-3">
+                                <i class="fa-solid fa-link mt-1 me-1"></i> Url
+                            </a>
+                        }
+                        @if(!string.IsNullOrEmpty(project.UrlLinkedin))
+                        {
+                            <a href="@project.UrlLinkedin" target="_blank" class="d-flex btn btn-primary me-3">
+                                <i class="fa-brands fa-linkedin mt-1 me-1"></i> Linkedin
+                            </a>
+                        }
+                        @if(!string.IsNullOrEmpty(project.UrlGithub))
+                        {
+                            <a href="@project.UrlGithub" target="_blank" class="d-flex btn btn-primary me-3">
+                                <i class="fa-brands fa-github mt-1 me-1"></i> Github
+                            </a>
+                        }
+                    </div>
+                </div>
+                <div class="modal-footer justify-content-between">
+                    <div class="d-flex">
+                        <i class="fa-brands fa-php fa-2xl me-3"></i>
+                        <i class="fa-brands fa-php fa-2xl me-3"></i>
+                        <i class="fa-brands fa-php fa-2xl me-3"></i>
+                    </div>
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Fechar</button>
+                </div>
+            </div>
+        </div>
+    </div>
+}

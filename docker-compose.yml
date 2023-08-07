@@ -1,0 +1,27 @@
+version: "3.7"
+name: migueloliveiradev
+services:
+    migueloliveiradev:
+        container_name: migueloliveiradev
+        image: migueloliveiradev
+        env_file:
+            - ./migueloliveiradev/.env
+        build:
+            context: ./migueloliveiradev
+            dockerfile: Dockerfile
+        ## restart: always
+        ports:
+            - 5152:5152
+        environment:
+            - TZ=America/Sao_Paulo
+            - ASPNETCORE_URLS=http://+:5152
+            - ASPNETCORE_ENVIRONMENT=Production
+        networks:
+            - database
+        deploy:
+            resources:
+                limits:
+                    memory: 1G
+networks:
+    database:
+        external: true

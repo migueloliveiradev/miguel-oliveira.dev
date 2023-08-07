@@ -1,6 +1,12 @@
-﻿@{
+﻿@using migueloliveiradev.ViewsModel;
+@model HomeViewModel
+@{
     ViewData["Title"] = "Home Page";
 }
-<partial name="Portfolio/Inicio.cshtml"/>
+<partial name="Components/Inicio.cshtml" />
 
-<partial name ="Portfolio/Sobre.cshtml" />
+<partial name="Components/About.cshtml" model="@Model.About" />
+
+<partial name="Components/Technologies.cshtml" model="@Model.Technologies" />
+
+<partial name="Components/Projects.cshtml" model="@Model.Projects" />
