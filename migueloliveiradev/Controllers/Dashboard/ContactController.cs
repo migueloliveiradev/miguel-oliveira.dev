@@ -13,16 +13,15 @@ public class ContactController : Controller
     {
         repository = contactRepository;
     }
-    [HttpPost("contacts/create")]
+    [AllowAnonymous, HttpPost("contacts/create")]
     public IActionResult Create(Contact contact)
     {
         repository.Create(contact);
-        return View();
+        return RedirectToAction("Home", "Home");
     }
     [Route("dashboard/contacts/")]
     public IActionResult Home(string? query, Status? status)
     {
-        //create query to search
         IEnumerable<Contact> contatos = repository.GetQueryFilter(query, status);
         return View("Views/Dashboard/Contacts/Home.cshtml", contatos);
     }

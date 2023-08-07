@@ -24,6 +24,6 @@ public class AboutController : Controller
     public IActionResult AddEdit(About about)
     {
         repository.CreateOrUpdate(about);
-        return RedirectToAction("Sobre", "Dashboard");
+        return RedirectToAction("Home", "About");
     }
 }

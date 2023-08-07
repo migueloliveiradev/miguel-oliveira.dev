@@ -1,19 +1,21 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using migueloliveiradev.Database;
+using migueloliveiradev.Repositories.Home;
+using migueloliveiradev.ViewsModel;
 
 namespace migueloliveiradev.Controllers;
 
 public class HomeController : Controller
 {
-    private readonly DatabaseContext _context;
-    public HomeController(DatabaseContext context)
+    private readonly IHomeRepository repository;
+    public HomeController(IHomeRepository repository)
     {
-        _context = context;
+        this.repository = repository;
     }
     [Route("/")]
     public IActionResult Home()
     {
-        ViewData["social-links"] = _context.SocialNetworks.ToList();
-        return View();
+        HomeViewModel model = repository.GetHomeViewModel();
+        return View(model);
     }
 }

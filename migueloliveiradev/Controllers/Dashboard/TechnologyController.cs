@@ -35,7 +35,7 @@ public class TechnologyController : Controller
         return RedirectToAction("Technology", "Dashboard");
     }
 
-    [Route("dashboard/technologies/delete/{id}")]
+    [Route("dashboard/technologies/{id}/delete")]
     public IActionResult Delete(int id)
     {
         repository.Delete(id);

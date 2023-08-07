@@ -28,9 +28,15 @@ public class DashboardController : Controller
         return PartialView(new Usuario());
     }
     [AllowAnonymous, HttpPost()]
-    public async Task<IActionResult> Login(Usuario usuario, bool lembrar)
+    public async Task<IActionResult> Login(Usuario usuario, [FromQuery] string ReturnUrl)
     {
-        await signInManager.PasswordSignInAsync(usuario.Username, usuario.Senha, lembrar, false);
+        await signInManager.PasswordSignInAsync(usuario.Username, usuario.Senha, true, false);
+
+        if (!string.IsNullOrEmpty(ReturnUrl))
+        {
+            return Redirect(ReturnUrl);
+        }
+
         return RedirectToAction("Home", "Dashboard");
     }
     public IActionResult Home()
