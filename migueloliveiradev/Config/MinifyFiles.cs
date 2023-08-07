@@ -13,11 +13,10 @@ public static class MinifyFiles
                 new CssSettings() { CommentMode = CssComment.None, IgnoreAllErrors = true },
                 "/lib/bootstrap/css/bootstrap.css",
                 "/lib/font-awesome/css/all.css",
-                
+                "/css/site.css",
                 "/css/dashboard/table.css",
                 "/css/dashboard/login.css",
                 "/css/dashboard/cards.css");
-            //"/css/site.css"
 
 
             pipeline.AddJavaScriptBundle("/js/all.min.js", 
