@@ -27,14 +27,15 @@ public class Program
         builder.Services.ConfigureWebOptimizer();
 
         WebApplication app = builder.Build();
-        app.ConfigureUserIdentity();
-        Console.WriteLine(app.Environment.IsDevelopment());
+        
         if (!app.Environment.IsDevelopment())
         {
             app.ApplyMigrations();
             app.UseExceptionHandler("/Home/Error");
             app.UseHsts();
         }
+
+        app.ConfigureUserIdentity();
 
         app.UseHttpsRedirection();
         app.UseStaticFiles();
