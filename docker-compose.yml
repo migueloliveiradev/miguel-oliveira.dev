@@ -4,12 +4,10 @@ services:
     migueloliveiradev:
         container_name: migueloliveiradev
         image: migueloliveiradev
-        env_file:
-            - ./migueloliveiradev/.env
         build:
             context: ./migueloliveiradev
             dockerfile: Dockerfile
-        ## restart: always
+        restart: always
         ports:
             - 5152:5152
         environment:
