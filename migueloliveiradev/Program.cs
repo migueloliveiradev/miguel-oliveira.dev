@@ -28,7 +28,7 @@ public class Program
 
         WebApplication app = builder.Build();
         app.ConfigureUserIdentity();
-
+        Console.WriteLine(app.Environment.IsDevelopment());
         if (!app.Environment.IsDevelopment())
         {
             app.ApplyMigrations();
