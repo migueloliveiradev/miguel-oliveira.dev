@@ -23,4 +23,5 @@ services:
                     memory: 1G
 networks:
     database:
+        name: database
         external: true
