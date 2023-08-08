@@ -20,6 +20,7 @@ public class Program
         builder.Services.AddHealthChecks();
 
         builder.ConfigureEnvironmentVariables();
+        Console.WriteLine(Environment.GetEnvironmentVariable("MYSQL_CONNECTION"));
         builder.Services.ConfigureDbContext();
         builder.Services.ConfigureIdentity();
         builder.Services.ConfigureDependencyInjection();
