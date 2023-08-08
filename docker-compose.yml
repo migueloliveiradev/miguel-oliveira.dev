@@ -8,6 +8,7 @@ services:
             context: ./migueloliveiradev
             dockerfile: Dockerfile
         restart: always
+        env_file: migueloliveiradev/.env
         ports:
             - 5152:5152
         environment:
@@ -16,10 +17,15 @@ services:
             - ASPNETCORE_ENVIRONMENT=Production
         networks:
             - database
+            - nginx
         deploy:
             resources:
                 limits:
                     memory: 1G
 networks:
     database:
+        name: database
+        external: true
+    nginx:
+        name: nginx
         external: true

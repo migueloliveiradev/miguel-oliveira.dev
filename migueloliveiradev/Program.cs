@@ -24,16 +24,17 @@ public class Program
         builder.Services.ConfigureIdentity();
         builder.Services.ConfigureDependencyInjection();
         builder.Services.ConfigureWebOptimizer();
-
+        
         WebApplication app = builder.Build();
-        app.ConfigureUserIdentity();
-
+        
         if (!app.Environment.IsDevelopment())
         {
             app.ApplyMigrations();
             app.UseExceptionHandler("/Home/Error");
             app.UseHsts();
         }
+
+        app.ConfigureUserIdentity();
 
         app.UseHttpsRedirection();
         app.UseStaticFiles();
