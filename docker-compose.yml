@@ -17,6 +17,7 @@ services:
             - ASPNETCORE_ENVIRONMENT=Production
         networks:
             - database
+            - nginx
         deploy:
             resources:
                 limits:
@@ -24,4 +25,7 @@ services:
 networks:
     database:
         name: database
+        external: true
+    nginx:
+        name: nginx
         external: true
