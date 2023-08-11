@@ -2,6 +2,8 @@
 
 [![Status](https://img.shields.io/badge/em-desenvolvimento-orange?style=for-the-badge)](#)
 [![wakatime](https://wakatime.com/badge/user/4ea4d323-1f7a-46e1-a08e-2080b1b95450/project/ab90eef6-170c-4d20-921d-2da07111a8fc.svg?style=for-the-badge)](https://wakatime.com/@eimigueloliveir)
+[![Bugs](https://img.shields.io/badge/dynamic/json?label=Bugs&query=$.component.measures[0].value&url=https%3A%2F%2Fsonarcloud.io%2Fapi%2Fmeasures%2Fcomponent%3Fcomponent%3Deimigueloliveir_migueloliveiradev%26metricKeys%3Dbugs&style=for-the-badge&color=red)](#)
+
 
 ## O projeto consiste em um portfolio com dashboard administrativa contendo os seguintes itens
 - Redes Sociais
