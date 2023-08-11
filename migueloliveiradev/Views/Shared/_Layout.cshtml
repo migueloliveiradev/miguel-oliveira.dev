@@ -5,9 +5,32 @@
 <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Miguel Oliveira - Desenvolvedor Full Stack</title>
+    <title>Miguel Oliveira - @Model.About?.Title</title>
     <link rel="stylesheet" href="~/css/all.min.css" asp-append-version="true" />
+    <meta name="keywords" content="Miguel Oliveira, desenvolvedor, programador, front-end, back-end, fullstack, developer">
+    <meta name="robots" content="index, follow, max-image-preview:large">
+    <meta property="og:title" content="@Model.About?.Title">
+    <meta property="og:description" content="@Model.About?.Description">
+    <meta property="og:site_name" content="Miguel Oliveira - @Model.About?.Title">
+    <meta property="og:image" content="https://miguel-oliveira.dev/img/home-bg.webp">
+    <meta property="og:image:width" content="1920">
+    <meta property="og:image:height" content="1080">
+    <meta property="og:image:type" content="image/webp">
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:image" content="https://miguel-oliveira.dev/img/home-bg.webp">
+    <meta name="author" content="Miguel Oliveira">
+    <meta name="copyright" content="© @DateTime.Now.Year Miguel Oliveira">
+
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-JQJGQL8NYH"></script>
+    <script>
+        window.dataLayer = window.dataLayer || [];
+        function gtag() { dataLayer.push(arguments); }
+        gtag('js', new Date());
+
+        gtag('config', 'G-JQJGQL8NYH');
+    </script>
 </head>
+
 <body>
     <i class="bi bi-list mobile-nav-toggle d-xl-none"></i>
     <header id="header">
