@@ -34,7 +34,7 @@ public class Program
             app.UseHsts();
         }
 
-        app.ConfigureUserIdentity();
+        app.UseStatusCode();
 
         app.UseHttpsRedirection();
         app.UseStaticFiles();
