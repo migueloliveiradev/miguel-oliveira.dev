@@ -1,5 +1,5 @@
 using Hangfire;
-using Hangfire.SqlServer;
+using Hangfire.MemoryStorage;
 using migueloliveiradev.Config;
 using migueloliveiradev.Utilities.Hangfire;
 
@@ -11,13 +11,7 @@ public class Program
     {
         WebApplicationBuilder builder = WebApplication.CreateBuilder();
         builder.Services.AddControllersWithViews();
-        builder.Services.AddHangfire(x => {
-             SqlServerStorageOptions options = new()
-             {
-                 JobExpirationCheckInterval = TimeSpan.FromMinutes(1)
-             };
-             x.UseSqlServerStorage(Environment.GetEnvironmentVariable("SQL_SERVER_CONNECTION_JOBS"), options);
-        });
+        builder.Services.AddHangfire(x => x.UseMemoryStorage());
         builder.Services.AddHangfireServer();
         builder.Services.AddOutputCache();
         builder.Services.AddHealthChecks();
