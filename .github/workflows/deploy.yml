@@ -1,9 +1,8 @@
 name: 'Deploy para Produção'
 
 on:
-  push:
-    tags:
-      - prod.**
+  release:
+    types: [published]
 
 jobs:
   deploy:
