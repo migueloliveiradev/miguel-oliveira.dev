@@ -1,5 +1,4 @@
-﻿using migueloliveiradev.Database;
-using migueloliveiradev.Repositories.Abouts;
+﻿using migueloliveiradev.Repositories.Abouts;
 using migueloliveiradev.Repositories.SocialNetworks;
 using migueloliveiradev.Repositories.Works.Projects.ProjectsRepos;
 using migueloliveiradev.Repositories.Works.Projects.Technologies;
@@ -14,9 +13,9 @@ public class HomeRepository : IHomeRepository
     private readonly ITechnologyRepository technologyRepository;
     private readonly IProjectsRepository projectsRepository;
 
-    public HomeRepository(IAboutRepository aboutRepository, 
-        ISocialNetworkRepository socialNetworkRepository, 
-        ITechnologyRepository technologyRepository, 
+    public HomeRepository(IAboutRepository aboutRepository,
+        ISocialNetworkRepository socialNetworkRepository,
+        ITechnologyRepository technologyRepository,
         IProjectsRepository projectsRepository)
     {
         this.aboutRepository = aboutRepository;

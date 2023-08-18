@@ -1,5 +1,4 @@
-﻿using migueloliveiradev.Services.Project;
-using Oci.Common;
+﻿using Oci.Common;
 using Oci.Common.Auth;
 using Oci.ObjectstorageService;
 using Oci.ObjectstorageService.Requests;
