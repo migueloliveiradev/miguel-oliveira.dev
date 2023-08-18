@@ -9,7 +9,7 @@ public static class MinifyFiles
     {
         services.AddWebOptimizer(pipeline =>
         {
-            pipeline.AddCssBundle("/css/all.min.css", 
+            pipeline.AddCssBundle("/css/all.min.css",
                 new CssSettings() { CommentMode = CssComment.None, IgnoreAllErrors = true },
                 "/lib/bootstrap/css/bootstrap.css",
                 "/lib/font-awesome/css/all.css",
@@ -19,10 +19,10 @@ public static class MinifyFiles
                 "/css/dashboard/cards.css");
 
 
-            pipeline.AddJavaScriptBundle("/js/all.min.js", 
+            pipeline.AddJavaScriptBundle("/js/all.min.js",
                 new CodeSettings() { MinifyCode = true, PreserveImportantComments = false, IgnoreAllErrors = true },
                 "/lib/bootstrap/js/bootstrap.js");
-            
+
         });
         return services;
     }

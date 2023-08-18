@@ -1,8 +1,8 @@
 ﻿using migueloliveiradev.Jobs.Images;
 using migueloliveiradev.Repositories.Abouts;
 using migueloliveiradev.Repositories.Contacts;
-using migueloliveiradev.Repositories.Home.Dashboard;
 using migueloliveiradev.Repositories.Home;
+using migueloliveiradev.Repositories.Home.Dashboard;
 using migueloliveiradev.Repositories.SocialNetworks;
 using migueloliveiradev.Repositories.Works.Projects.Images;
 using migueloliveiradev.Repositories.Works.Projects.ProjectsRepos;
