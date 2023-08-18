@@ -2,7 +2,7 @@ name: 'Deploy para Produção'
 
 on:
   release:
-    types: [created, published, edited, released]
+    types: [published]
 
 jobs:
   deploy:
