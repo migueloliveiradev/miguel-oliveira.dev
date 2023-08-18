@@ -1,4 +1,5 @@
 using Hangfire;
+using Hangfire.SqlServer;
 using migueloliveiradev.Config;
 using migueloliveiradev.Utilities.Hangfire;
 
@@ -9,9 +10,14 @@ public class Program
     public static async Task Main()
     {
         WebApplicationBuilder builder = WebApplication.CreateBuilder();
-        builder.Services.AddRazorPages();
-        builder.Services.AddControllersWithViews().AddRazorRuntimeCompilation();
-        builder.Services.AddHangfire(x => x.UseSqlServerStorage(Environment.GetEnvironmentVariable("SQL_SERVER_CONNECTION_JOBS")));
+        builder.Services.AddControllersWithViews();
+        builder.Services.AddHangfire(x => {
+             SqlServerStorageOptions options = new()
+             {
+                 JobExpirationCheckInterval = TimeSpan.FromMinutes(1)
+             };
+             x.UseSqlServerStorage(Environment.GetEnvironmentVariable("SQL_SERVER_CONNECTION_JOBS"), options);
+        });
         builder.Services.AddHangfireServer();
         builder.Services.AddOutputCache();
         builder.Services.AddHealthChecks();
@@ -48,6 +54,9 @@ public class Program
         });
 
         app.MapControllers();
+        app.MapControllerRoute(
+            name: "default",
+            pattern: "{controller=Home}/{action=Index}/{id?}");
         app.UseWebOptimizer();
 
         app.Run();
