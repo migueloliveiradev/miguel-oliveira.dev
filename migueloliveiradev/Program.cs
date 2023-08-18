@@ -2,20 +2,18 @@ using Hangfire;
 using Hangfire.MemoryStorage;
 using Microsoft.Extensions.Diagnostics.HealthChecks;
 using migueloliveiradev.Config;
-using System.Text.Json;
-using System.Text;
-using Microsoft.AspNetCore.Diagnostics.HealthChecks;
+using migueloliveiradev.Utilities.Hangfire;
 
 namespace migueloliveiradev;
 
 public class Program
 {
-    public static void Main()
+    public static async Task Main()
     {
         WebApplicationBuilder builder = WebApplication.CreateBuilder();
         builder.Services.AddRazorPages();
         builder.Services.AddControllersWithViews().AddRazorRuntimeCompilation();
-        builder.Services.AddHangfire(x => x.UseMemoryStorage());
+        builder.Services.AddHangfire(x => x.UseSqlServerStorage(Environment.GetEnvironmentVariable("SQL_SERVER_CONNECTION_JOBS")));
         builder.Services.AddHangfireServer();
         builder.Services.AddHealthChecks();
 
@@ -40,8 +38,13 @@ public class Program
         app.UseStaticFiles();
 
         app.UseRouting();
+        app.UseAuthentication();
+        app.UseAuthorization();
 
-        app.UseHangfireDashboard();
+        app.UseHangfireDashboard("/dashboard/hangfire", new DashboardOptions
+        {
+            Authorization = new[] { new AuthorizationFilter() }
+        });
 
         app.UseAuthorization();
         app.MapControllers();
