@@ -1,5 +1,5 @@
 ﻿using Microsoft.AspNetCore.Mvc;
-using migueloliveiradev.Database;
+using Microsoft.AspNetCore.OutputCaching;
 using migueloliveiradev.Repositories.Home;
 using migueloliveiradev.ViewsModel;
 
@@ -12,7 +12,7 @@ public class HomeController : Controller
     {
         this.repository = repository;
     }
-    [Route("/")]
+    [Route("/"), OutputCache(Duration = 1800)]
     public IActionResult Home()
     {
         HomeViewModel model = repository.GetHomeViewModel();

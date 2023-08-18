@@ -1,0 +1,22 @@
+name: 'Deploy para Produção'
+
+on:
+  push:
+    tags:
+      - prod.**
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+    steps:
+      - name: install ssh
+        run: |
+          install -m 600 -D /dev/null ~/.ssh/id_rsa
+          echo "${{ secrets.SSH_PRIVATE_KEY }}" > ~/.ssh/id_rsa
+          ssh-keyscan -H ${{ secrets.SSH_HOST }} > ~/.ssh/known_hosts
+
+      - name: deploy
+        run: ssh ${{ secrets.SSH_USER }}@${{ secrets.SSH_HOST }} "${{ secrets.SCRIPT_DEPLOY }}"
+
+      - name: clean
+        run: rm -rf ~/.ssh

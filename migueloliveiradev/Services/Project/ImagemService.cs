@@ -1,9 +1,6 @@
 ﻿using Hangfire;
 using migueloliveiradev.Jobs.Images;
 using migueloliveiradev.Services.Storage;
-using Oci.Common.Auth;
-using Org.BouncyCastle.Crypto.Parameters;
-using Org.BouncyCastle.OpenSsl;
 
 namespace migueloliveiradev.Services.Project;
 
