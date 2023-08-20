@@ -120,18 +120,18 @@ public class ProjectsController : Controller
     public IActionResult Create(Project projeto)
     {
         repository.Create(projeto);
-        return RedirectToAction("Portfolio", "Dashboard");
+        return RedirectToAction("Home", "Projects");
     }
     [Route("dashboard/projects/update")]
     public IActionResult Update(Project projeto)
     {
         repository.Update(projeto);
-        return Ok();
+        return RedirectToAction("Home", "Projects");
     }
     [Route("dashboard/projects/delete/{id}")]
     public IActionResult Delete(int id)
     {
         repository.Delete(id);
-        return Ok();
+        return RedirectToAction("Home", "Projects");
     }
 }

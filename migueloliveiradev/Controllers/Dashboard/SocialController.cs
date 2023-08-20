@@ -26,20 +26,20 @@ public class SocialController : Controller
     public IActionResult Create(SocialNetwork social)
     {
         repository.Create(social);
-        return RedirectToAction("Social", "Dashboard");
+        return RedirectToAction("Home", "Social");
     }
 
     [HttpPost("dashboard/social/edit")]
     public IActionResult Edit(SocialNetwork social)
     {
         repository.Update(social);
-        return RedirectToAction("Social", "Dashboard");
+        return RedirectToAction("Home", "Social");
     }
 
     [Route("dashboard/social/{id}/delete")]
     public IActionResult Delete(int id)
     {
         repository.Delete(id);
-        return RedirectToAction("Social", "Dashboard");
+        return RedirectToAction("Home", "Social");
     }
 }
