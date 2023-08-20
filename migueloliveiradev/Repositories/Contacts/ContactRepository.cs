@@ -71,6 +71,7 @@ public class ContactRepository : IContactRepository
 
     public void Create(Contact contact)
     {
+        contact.SendDate = DateTime.Now;
         context.Contacts.Add(contact);
         context.SaveChanges();
     }
