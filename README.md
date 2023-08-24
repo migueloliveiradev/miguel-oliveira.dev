@@ -1,7 +1,9 @@
 # migueloliveiradev
 
 [![Status](https://img.shields.io/badge/em-desenvolvimento-orange?style=for-the-badge)](#)
+[![Lines Of Code](https://www.aschey.tech/tokei/github/eimigueloliveir/migueloliveiradev?style=for-the-badge&label=Linhas%20de%20Codigo)](#)
 [![wakatime](https://wakatime.com/badge/user/4ea4d323-1f7a-46e1-a08e-2080b1b95450/project/ab90eef6-170c-4d20-921d-2da07111a8fc.svg?style=for-the-badge)](https://wakatime.com/@eimigueloliveir)
+
 
 ## O projeto consiste em um portfolio com dashboard administrativa contendo os seguintes itens
 - Redes Sociais
