@@ -32,7 +32,7 @@
  - [Hangfire](https://www.hangfire.io)
    - Criação de jobs em filas em segundo plano
  - [SixLabors.ImageSharp](https://sixlabors.com/products/imagesharp/)
-   - Otimização de imagens para SVG usando jobs
+   - Otimização de imagens para WEBP usando jobs
  - [WebOptimizer](https://github.com/ligershark/WebOptimizer)
    - Otimização e minificação de arquivos e bibliotecas staticas
  - [Oracle Cloud](https://www.oracle.com/br/cloud/)
