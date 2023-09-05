@@ -17,7 +17,7 @@ public class TechnologyRepository : ITechnologyRepository
     }
     public Technology? GetByIdWithProjects(int id)
     {
-        return context.Technologies.Include(p => p.Projetos).FirstOrDefault(p => p.Id == id);
+        return context.Technologies.Include(p => p.Projects).FirstOrDefault(p => p.Id == id);
     }
 
     public IEnumerable<Technology> GetAll()
@@ -26,7 +26,7 @@ public class TechnologyRepository : ITechnologyRepository
     }
     public IEnumerable<Technology> GetAllWithProjects()
     {
-        return context.Technologies.Include(p => p.Projetos).ToList();
+        return context.Technologies.Include(p => p.Projects).ToList();
     }
 
     public int GetCount()

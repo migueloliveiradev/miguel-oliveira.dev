@@ -23,7 +23,7 @@ public class ProjectsController : Controller
     [Route("dashboard/projects")]
     public IActionResult Home()
     {
-        IEnumerable<Project> projetos = repository.GetAllWithImagesAndTechnologies();
+        IEnumerable<Project> projetos = repository.GetAllWithImagesAndTechnologiesAndComments();
         return View("Views/Dashboard/Projects/Home.cshtml", projetos);
     }
     [Route("dashboard/projects/{id}/edit")]
@@ -91,6 +91,17 @@ public class ProjectsController : Controller
             transaction.Commit();
         }
         return RedirectToAction("Images", "Projects", new { id });
+    }
+    [Route("dashboard/projects/{id}/comments")]
+    public IActionResult Comments(int id)
+    {
+        Project? projeto = repository.GetByIdWithComments(id);
+        if (projeto == null)
+        {
+            return NotFound();
+        }
+
+        return View("Views/Dashboard/Projects/Comments.cshtml", projeto);
     }
     [Route("dashboard/projects/{id}/tecnologies")]
     public IActionResult Tecnologies(int id)

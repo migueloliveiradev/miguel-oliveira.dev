@@ -20,7 +20,7 @@ public class Program
         builder.Services.ConfigureIdentity();
         builder.Services.ConfigureDependencyInjection();
         builder.Services.ConfigureWebOptimizer();
-
+           
         WebApplication app = builder.Build();
 
         if (!app.Environment.IsDevelopment())

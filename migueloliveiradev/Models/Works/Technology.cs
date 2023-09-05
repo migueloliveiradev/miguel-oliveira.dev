@@ -9,7 +9,7 @@ public class Technology
     public TypeIcon TypeIcon { get; set; }
     public string Icon { get; set; }
     public string Url { get; set; }
-    public virtual List<Project> Projetos { get; set; }
+    public virtual List<Project> Projects { get; set; }
 }
 public enum TypeIcon
 {

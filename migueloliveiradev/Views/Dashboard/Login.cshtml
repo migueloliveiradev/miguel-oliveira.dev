@@ -18,11 +18,11 @@
                 <h2>Login</h2>
                 <form asp-action="Login" asp-controller="Dashboard" asp-route-ReturnUrl="@Context.Request.Query["ReturnUrl"]" method="post">
                     <div class="user-box">
-                        <input type="text" asp-for="Username" required>
+                        <input class="input-login" type="text" asp-for="Username" required>
                         <label>Username</label>
                     </div>
                     <div class="user-box">
-                        <input type="password" asp-for="Senha" required>
+                        <input class="input-login" type="password" asp-for="Senha" required>
                         <label>Password</label>
                     </div>
                     <button type="submit" class="btn btn-success">Entrar</button>

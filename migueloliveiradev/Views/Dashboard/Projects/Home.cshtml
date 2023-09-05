@@ -13,11 +13,15 @@
         margin: 0;
     }
 
-    .technologies span {
-        margin-left: 3px;
-        width: 60px;
-        height: 25px;
-        line-height: 1.3;
+        .technologies span {
+            margin-left: 3px;
+            width: 60px;
+            height: 25px;
+            line-height: 1.3;
+        }
+
+    .card {
+        height: 300px !important;
     }
 
 </style>
@@ -32,13 +36,13 @@
             <div class="card card-custom position-relative shadow-sm border-0">
                 <div class="card-body d-flex flex-row">
                     <div class="flex-grow-1">
-                        <h5 class="card-title">@project.Titulo</h5>
+                        <h5 class="card-title">@project.Titulo - @project.Comments.Count comentarios</h5>
                         <h6 class="card-subtitle mb-2 text-body-secondary">@project.SubTitulo</h6>
                         <div class="me-10">
                             @project.Descricao
                         </div>
                         <div class="mb-5">
-                            @if(!string.IsNullOrEmpty(project.Url))
+                            @if (!string.IsNullOrEmpty(project.Url))
                             {
                                 <a href="@project.Url" class="card-link">Url</a>
                             }
@@ -57,14 +61,16 @@
                             <a asp-action="Edit" asp-controller="Projects" asp-route-id="@project.Id" class="btn btn-primary my-1">Editar</a>
                             <a asp-action="Images" asp-controller="Projects" asp-route-id="@project.Id" class="btn btn-primary my-1">Editar Imagens</a>
                             <a asp-action="Tecnologies" asp-controller="Projects" asp-route-id="@project.Id" class="btn btn-primary my-1">Editar Tecnologias</a>
+                            <a asp-action="Comments" asp-controller="Projects" asp-route-id="@project.Id" class="btn btn-primary my-1">Comentarios</a>
                             <a asp-action="Edit" asp-controller="Projects" asp-route-id="@project.Id" class="btn btn-primary my-1">Excluir</a>
                         </div>
                     </div>
                     <div class="position-absolute bottom-0 start-0 m-3">
                         <div class="technologies">
-                            <span class="badge bg-secondary">C#</span>
-                            <span class="badge bg-secondary">HTML</span>
-                            <span class="badge bg-secondary">CSS</span>
+                            @foreach (var item in project.Technologies)
+                            {
+                                <span class="badge bg-secondary">@item.Nome</span>
+                            }
                         </div>
                     </div>
                     @if (!string.IsNullOrEmpty(project.DateStart.ToString()))
