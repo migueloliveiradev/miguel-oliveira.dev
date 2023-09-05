@@ -8,16 +8,12 @@ public static class Database
     public static IServiceCollection ConfigureDbContext(this IServiceCollection services)
     {
         string connection = Environment.GetEnvironmentVariable("MYSQL_CONNECTION")!;
-        services.AddDbContext<DatabaseUsersContext>(options =>
-        {
-            options.UseMySql(connection, ServerVersion.AutoDetect(connection));
-            options.UseLazyLoadingProxies();
-        });
 
         services.AddDbContext<DatabaseContext>(options =>
         {
             options.UseMySql(connection, ServerVersion.AutoDetect(connection));
             options.UseLazyLoadingProxies();
+            options.UseSnakeCaseNamingConvention();
         });
 
         return services;
@@ -28,9 +24,6 @@ public static class Database
         using IServiceScope scope = app.Services.CreateScope();
         DatabaseContext context = scope.ServiceProvider.GetRequiredService<DatabaseContext>();
         context.Database.Migrate();
-        DatabaseUsersContext usersContext = scope.ServiceProvider.GetRequiredService<DatabaseUsersContext>();
-        usersContext.Database.Migrate();
-
         return app;
     }
 }
