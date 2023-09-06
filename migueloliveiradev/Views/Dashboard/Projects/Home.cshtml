@@ -21,7 +21,7 @@
         }
 
     .card {
-        height: 300px !important;
+        min-height: 300px !important;
     }
 
 </style>
@@ -39,7 +39,7 @@
                         <h5 class="card-title">@project.Titulo - @project.Comments.Count comentarios</h5>
                         <h6 class="card-subtitle mb-2 text-body-secondary">@project.SubTitulo</h6>
                         <div class="me-10">
-                            @project.Descricao
+                            @Html.Raw(project.Descricao.Replace("\r\n", "<br/>"))
                         </div>
                         <div class="mb-5">
                             @if (!string.IsNullOrEmpty(project.Url))

@@ -67,7 +67,7 @@
                         <div class="m-3 description-project">
                             <h1>@project.Titulo</h1>
                             <p>@project.SubTitulo</p>
-                            <p class="card-text">@project.Descricao</p>
+                            <p class="card-text">@Html.Raw(project.Descricao.Replace("\r\n", "<br/>"))</p>
                             <p class="text-end opacity-50">@project.DateStart - @project.DateEnd</p>
                         </div>
                     </div>
