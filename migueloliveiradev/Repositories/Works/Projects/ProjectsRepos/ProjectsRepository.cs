@@ -24,9 +24,25 @@ public class ProjectsRepository : IProjectsRepository
     {
         return context.Projects.Include(p => p.Technologies).FirstOrDefault(p => p.Id == id);
     }
+    public Project? GetByIdWithComments(int id)
+    {
+        return context.Projects.Include(p => p.Comments).FirstOrDefault(p => p.Id == id);
+    }
     public Project? GetByIdWithImagesAndTechnologies(int id)
     {
         return context.Projects.Include(p => p.Images).Include(p => p.Technologies).FirstOrDefault(p => p.Id == id);
+    }
+    public Project? GetByIdWithImagesAndComments(int id)
+    {
+        return context.Projects.Include(p => p.Images).Include(p => p.Comments).FirstOrDefault(p => p.Id == id);
+    }
+    public Project? GetByIdWithTechnologiesAndComments(int id)
+    {
+        return context.Projects.Include(p => p.Technologies).Include(p => p.Comments).FirstOrDefault(p => p.Id == id);
+    }
+    public Project? GetByIdWithImagesAndTechnologiesAndComments(int id)
+    {
+        return context.Projects.Include(p => p.Images).Include(p => p.Technologies).Include(p => p.Comments).FirstOrDefault(p => p.Id == id);
     }
     public IEnumerable<Technology> GetTechnologies(int id)
     {
@@ -62,9 +78,25 @@ public class ProjectsRepository : IProjectsRepository
     {
         return context.Projects.Include(p => p.Technologies).ToList();
     }
+    public IEnumerable<Project> GetAllWithComments()
+    {
+        return context.Projects.Include(p => p.Comments).ToList();
+    }
     public IEnumerable<Project> GetAllWithImagesAndTechnologies()
     {
         return context.Projects.Include(p => p.Images).Include(p => p.Technologies).ToList();
+    }
+    public IEnumerable<Project> GetAllWithImagesAndComments()
+    {
+        return context.Projects.Include(p => p.Images).Include(p => p.Comments).ToList();
+    }
+    public IEnumerable<Project> GetAllWithTechnologiesAndComments()
+    {
+        return context.Projects.Include(p => p.Technologies).Include(p => p.Comments).ToList();
+    }
+    public IEnumerable<Project> GetAllWithImagesAndTechnologiesAndComments()
+    {
+        return context.Projects.Include(p => p.Images).Include(p => p.Technologies).Include(p => p.Comments).ToList();
     }
 
     public void Create(Project project)
@@ -81,17 +113,20 @@ public class ProjectsRepository : IProjectsRepository
 
     public void AddTechnology(int id, int id_technology)
     {
-        Project project = context.Projects.Where(p => p.Id == id).First();
-        Technology technology = context.Technologies.Where(t => t.Id == id_technology).First();
-        project.Technologies.Add(technology);
+        ProjectTechnology projectTechnology = new()
+        {
+            ProjectId = id,
+            TechnologyId = id_technology
+        };
+
+        context.ProjectTechnologies.Add(projectTechnology);
         context.SaveChanges();
     }
 
     public void RemoveTechnology(int id, int id_technology)
     {
-        Project project = context.Projects.Where(p => p.Id == id).First();
-        Technology technology = context.Technologies.Where(t => t.Id == id_technology).First();
-        project.Technologies.Remove(technology);
+        ProjectTechnology projectTechnology = context.ProjectTechnologies.Where(pt => pt.ProjectId == id && pt.TechnologyId == id_technology).First();
+        context.ProjectTechnologies.Remove(projectTechnology);
         context.SaveChanges();
     }
 

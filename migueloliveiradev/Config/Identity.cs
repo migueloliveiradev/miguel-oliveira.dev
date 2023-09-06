@@ -8,7 +8,7 @@ public static class Identity
     public static IServiceCollection ConfigureIdentity(this IServiceCollection services)
     {
         services.AddIdentity<IdentityUser, IdentityRole>()
-            .AddEntityFrameworkStores<DatabaseUsersContext>()
+            .AddEntityFrameworkStores<DatabaseContext>()
             .AddDefaultTokenProviders();
 
         services.Configure<IdentityOptions>(options =>
@@ -19,10 +19,7 @@ public static class Identity
             options.Password.RequireUppercase = false;
             options.Password.RequiredLength = 6;
             options.Password.RequiredUniqueChars = 1;
-
-            options.Lockout.DefaultLockoutTimeSpan = TimeSpan.FromMinutes(5);
             options.Lockout.MaxFailedAccessAttempts = 5;
-            options.Lockout.AllowedForNewUsers = true;
 
             options.User.AllowedUserNameCharacters = "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789";
             options.User.RequireUniqueEmail = true;
@@ -30,7 +27,6 @@ public static class Identity
 
         services.ConfigureApplicationCookie(options =>
         {
-            // Cookie settings
             options.Cookie.Name = "token_auth";
             options.Cookie.HttpOnly = true;
             options.ExpireTimeSpan = TimeSpan.FromDays(90);
@@ -46,17 +42,14 @@ public static class Identity
     {
         using IServiceScope scope = app.Services.CreateScope();
         UserManager<IdentityUser> userManager = scope.ServiceProvider.GetRequiredService<UserManager<IdentityUser>>();
-        if (!userManager.Users.Any())
+
+        if (userManager.Users.Any()) return;
+
+        IdentityUser user = new(Environment.GetEnvironmentVariable("DEFAULT_USERNAME")!)
         {
-            IdentityUser user = new(Environment.GetEnvironmentVariable("DEFAULT_USERNAME")!)
-            {
-                Email = Environment.GetEnvironmentVariable("DEFAULT_EMAIL")!,
-                EmailConfirmed = true,
-            };
-            var re = await userManager.CreateAsync(
-                 user,
-                 Environment.GetEnvironmentVariable("DEFAULT_PASSWORD")!);
-            Console.WriteLine(re);
-        }
+            Email = Environment.GetEnvironmentVariable("DEFAULT_EMAIL")!,
+            EmailConfirmed = true
+        };
+        await userManager.CreateAsync(user, Environment.GetEnvironmentVariable("DEFAULT_PASSWORD")!);
     }
 }

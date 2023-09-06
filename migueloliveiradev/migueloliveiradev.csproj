@@ -32,9 +32,10 @@
 	</ItemGroup>
 
 	<ItemGroup>
+		<PackageReference Include="EFCore.NamingConventions" Version="7.0.2" />
 		<PackageReference Include="Hangfire.AspNetCore" Version="1.8.5" />
 		<PackageReference Include="Hangfire.MemoryStorage" Version="1.8.0" />
-		<PackageReference Include="LigerShark.WebOptimizer.Core" Version="3.0.386" />
+		<PackageReference Include="LigerShark.WebOptimizer.Core" Version="3.0.391" />
 		<PackageReference Include="Microsoft.AspNetCore.Identity.EntityFrameworkCore" Version="7.0.10" />
 		<PackageReference Include="Microsoft.AspNetCore.Identity.UI" Version="7.0.10" />
 		<PackageReference Include="Microsoft.AspNetCore.Mvc.Razor.RuntimeCompilation" Version="7.0.10" />
@@ -47,9 +48,9 @@
 		<PackageReference Include="Microsoft.Extensions.Identity.Core" Version="7.0.10" />
 		<PackageReference Include="Microsoft.VisualStudio.Web.CodeGeneration.Design" Version="7.0.9" />
 		<PackageReference Include="Microsoft.Web.LibraryManager.Build" Version="2.1.175" />
-		<PackageReference Include="OCI.DotNetSDK.Objectstorage" Version="69.1.0" />
+		<PackageReference Include="OCI.DotNetSDK.Objectstorage" Version="71.0.0" />
 		<PackageReference Include="Pomelo.EntityFrameworkCore.MySql" Version="7.0.0" />
-		<PackageReference Include="SixLabors.ImageSharp" Version="3.0.1" />
+		<PackageReference Include="SixLabors.ImageSharp" Version="3.0.2" />
 		<PackageReference Include="System.Data.SqlClient" Version="4.8.5" />
 	</ItemGroup>
 

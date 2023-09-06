@@ -23,7 +23,7 @@ public class ProjectsController : Controller
     [Route("dashboard/projects")]
     public IActionResult Home()
     {
-        IEnumerable<Project> projetos = repository.GetAllWithImagesAndTechnologies();
+        IEnumerable<Project> projetos = repository.GetAllWithImagesAndTechnologiesAndComments();
         return View("Views/Dashboard/Projects/Home.cshtml", projetos);
     }
     [Route("dashboard/projects/{id}/edit")]
@@ -60,20 +60,18 @@ public class ProjectsController : Controller
         using (var transaction = context.Database.BeginTransaction())
         {
             Project projeto = context.Projects.Find(id)!;
-            string uuid = Guid.NewGuid().ToString();
-            string file_name = $"{uuid}.{file.ContentType.Split('/')[1]}";
-            string file_name_webp = $"{uuid}.webp";
+            string file_id = Guid.NewGuid().ToString();
+            string file_name = $"{file_id}.{file.ContentType.Split('/')[1]}";
             Image image = new()
             {
                 Description = description,
                 ProjetoId = projeto.Id,
-                Name = file_name,
-                NameWebp = file_name_webp
+                Name = file_name
             };
 
-            await imageService.UploadImage(file.OpenReadStream(), file.ContentType, uuid);
-            context.Images.Add(image);
-            context.SaveChanges();
+            await context.Images.AddAsync(image);
+            await context.SaveChangesAsync();
+            await imageService.UploadImage(file.OpenReadStream(), file.ContentType, file_id, image.Id);
             transaction.Commit();
         }
         return RedirectToAction("Images", "Projects", new { id });
@@ -84,13 +82,23 @@ public class ProjectsController : Controller
         using (var transaction = context.Database.BeginTransaction())
         {
             Image image = context.Images.Find(idImage)!;
-            await Task.WhenAll(imageService.DeleteImage(image.Name),
-                               imageService.DeleteImage(image.NameWebp));
+            await Task.WhenAll(imageService.DeleteImage(image.Name));
             context.Images.Remove(image);
             context.SaveChanges();
             transaction.Commit();
         }
         return RedirectToAction("Images", "Projects", new { id });
+    }
+    [Route("dashboard/projects/{id}/comments")]
+    public IActionResult Comments(int id)
+    {
+        Project? projeto = repository.GetByIdWithComments(id);
+        if (projeto == null)
+        {
+            return NotFound();
+        }
+
+        return View("Views/Dashboard/Projects/Comments.cshtml", projeto);
     }
     [Route("dashboard/projects/{id}/tecnologies")]
     public IActionResult Tecnologies(int id)

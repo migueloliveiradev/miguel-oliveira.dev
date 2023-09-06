@@ -13,12 +13,14 @@ namespace migueloliveiradev.Controllers;
 public class DashboardController : Controller
 {
     private readonly SignInManager<IdentityUser> signInManager;
+    private readonly UserManager<IdentityUser> userManager;
     private readonly DatabaseContext context;
     private readonly IHomeDashboardRepository homeDashboardRepository;
 
-    public DashboardController(SignInManager<IdentityUser> signInManager, DatabaseContext context, IHomeDashboardRepository homeDashboardRepository)
+    public DashboardController(SignInManager<IdentityUser> signInManager, UserManager<IdentityUser> userManager, DatabaseContext context, IHomeDashboardRepository homeDashboardRepository)
     {
         this.signInManager = signInManager;
+        this.userManager = userManager;
         this.context = context;
         this.homeDashboardRepository = homeDashboardRepository;
     }

@@ -48,7 +48,7 @@
     font-size: 12px;
 }
 
-input:-webkit-autofill {
+.input-login:-webkit-autofill {
     -webkit-text-fill-color: #fff;
     -webkit-background-clip: text;
 }

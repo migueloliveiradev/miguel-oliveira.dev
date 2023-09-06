@@ -14,4 +14,5 @@ public class Project
     public DateTime? DateEnd { get; set; }
     public virtual List<Image> Images { get; set; }
     public virtual List<Technology> Technologies { get; set; }
+    public virtual List<Comment> Comments { get; set; }
 }
