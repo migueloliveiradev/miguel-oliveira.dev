@@ -66,4 +66,10 @@
 		<Folder Include="Views\Home\Portfolio\" />
 	</ItemGroup>
 
+	<ItemGroup>
+		<SonarQubeSetting Include="sonar.coverage.exclusions">
+			<Value>**/Migrations/*</Value>
+		</SonarQubeSetting>
+	</ItemGroup>
+
 </Project>
