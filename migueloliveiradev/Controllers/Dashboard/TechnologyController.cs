@@ -2,6 +2,7 @@
 using Microsoft.AspNetCore.Mvc;
 using migueloliveiradev.Models.Works;
 using migueloliveiradev.Repositories.Works.Projects.Technologies;
+using migueloliveiradev.Services.Storage;
 
 namespace migueloliveiradev.Controllers.Dashboard;
 
@@ -9,9 +10,11 @@ namespace migueloliveiradev.Controllers.Dashboard;
 public class TechnologyController : Controller
 {
     private readonly ITechnologyRepository repository;
-    public TechnologyController(ITechnologyRepository repository)
+    private readonly IStorageService storageService;
+    public TechnologyController(ITechnologyRepository repository, IStorageService storageService)
     {
         this.repository = repository;
+        this.storageService = storageService;
     }
 
     [Route("dashboard/technologies")]
@@ -22,8 +25,14 @@ public class TechnologyController : Controller
     }
 
     [HttpPost(), Route("dashboard/technologies/create")]
-    public IActionResult Create(Technology technology)
+    public async Task<IActionResult> Create(Technology technology, IFormFile svg)
     {
+        if (string.IsNullOrEmpty(technology.Icon))
+        {
+            string file_id = Guid.NewGuid().ToString();
+            technology.Icon = $"{file_id}.svg";
+            await storageService.UploadImage(svg.OpenReadStream(), svg.ContentType, technology.Icon);
+        }
         repository.Create(technology);
         return RedirectToAction("Home", "Technology");
     }

@@ -1,4 +1,5 @@
 ﻿@using migueloliveiradev.Models.Works.Projetos;
+@using migueloliveiradev.Models.Works;
 @model IEnumerable<Project>
 
 <section id="portfolio" class="portfolio section-bg">
@@ -93,9 +94,17 @@
                 </div>
                 <div class="modal-footer justify-content-between">
                     <div class="d-flex">
-                        <i class="fa-brands fa-php fa-2xl me-3"></i>
-                        <i class="fa-brands fa-php fa-2xl me-3"></i>
-                        <i class="fa-brands fa-php fa-2xl me-3"></i>
+                        @foreach(Technology tech in project.Technologies)
+                        {
+                            @if (tech.TypeIcon == TypeIcon.FontAwesome)
+                            {
+                                <i class="@tech.Icon fa-2xl me-3"></i>
+                            }
+                            else
+                            {
+                                <img width="40" height="40" src="@tech.IconUrl" class="me-3" />
+                            }
+                        }
                     </div>
                     <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Fechar</button>
                 </div>

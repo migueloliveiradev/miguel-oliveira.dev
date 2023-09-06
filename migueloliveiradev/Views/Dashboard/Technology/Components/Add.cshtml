@@ -10,7 +10,7 @@
                 <h1 class="modal-title fs-5">Adicionar Tecnologia</h1>
                 <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
             </div>
-            <form asp-action="Create" asp-controller="Technology" method="post">
+            <form asp-action="Create" asp-controller="Technology" method="post" enctype="multipart/form-data">
                 <div class="modal-body">
                     <div class="mb-3">
                         <label class="form-label">Nome</label>
@@ -25,11 +25,11 @@
                     </div>
                     <div class="mb-3">
                         <label class="form-label">Class Icon</label>
-                        <input asp-for="Icon" required type="text" class="form-control">
+                        <input asp-for="Icon" type="text" class="form-control">
                     </div>
                     <div class="mb-3">
                         <label class="form-label">Arquivo SVG</label>
-                        <input asp-for="Icon" type="file" accept="image/svg" class="form-control">
+                        <input name="svg" type="file" accept="image/svg" class="form-control">
                     </div>
                     <div class="mb-3">
                         <label class="form-label">Url da Tecnologia</label>

@@ -23,7 +23,14 @@
             @foreach (Technology tech in Model)
             {
                 <tr>
-                    <th><i class="w-25 h-25 @tech.Icon fa-2xl"></i></th>
+                    @if(tech.TypeIcon == TypeIcon.FontAwesome)
+                    {
+                        <td><i class="w-25 h-25 @tech.Icon fa-2xl"></i></td>
+                    }
+                    else
+                    {
+                        <td><img width="40" height="40" src="@tech.IconUrl" /></td>
+                    }
                     <td>@tech.Nome</td>
                     <td>@tech.Icon</td>
                     <td>@tech.Projects.Count</td>
