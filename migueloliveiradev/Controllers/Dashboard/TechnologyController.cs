@@ -53,6 +53,6 @@ public class TechnologyController : Controller
             await storageService.DeleteImage(technology.Icon);
         }
         repository.Delete(id);
-        return RedirectToAction("Technology", "Dashboard");
+        return RedirectToAction("Home", "Technology");
     }
 }
