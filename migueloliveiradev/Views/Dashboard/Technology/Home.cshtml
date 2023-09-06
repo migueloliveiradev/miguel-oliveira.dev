@@ -36,7 +36,7 @@
                     <td>@tech.Projects.Count</td>
                     <td>
                         <button type="button" class="btn">Editar</button>
-                        <a class="btn" >Excluir</a>
+                        <a class="btn" asp-action="delete" asp-controller="Technology" asp-route-id="@tech.Id">Excluir</a>
                     </td>
                 </tr>
             }

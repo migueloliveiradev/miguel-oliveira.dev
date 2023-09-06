@@ -45,8 +45,13 @@ public class TechnologyController : Controller
     }
 
     [Route("dashboard/technologies/{id}/delete")]
-    public IActionResult Delete(int id)
+    public async Task<IActionResult> Delete(int id)
     {
+        Technology technology = repository.GetById(id)!;
+        if(technology.TypeIcon == TypeIcon.File)
+        {
+            await storageService.DeleteImage(technology.Icon);
+        }
         repository.Delete(id);
         return RedirectToAction("Technology", "Dashboard");
     }
