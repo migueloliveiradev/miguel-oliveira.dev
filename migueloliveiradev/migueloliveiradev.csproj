@@ -6,6 +6,7 @@
 		<ImplicitUsings>enable</ImplicitUsings>
 		<UserSecretsId>c71caa5c-76b0-4ec7-b323-57a0ee0570c1</UserSecretsId>
 		<DockerDefaultTargetOS>Linux</DockerDefaultTargetOS>
+		<SonarQubeExclude>true</SonarQubeExclude>
 	</PropertyGroup>
 
 	<ItemGroup>
@@ -64,12 +65,6 @@
 		<Folder Include="Views\Dashboard\Components\Dashboard\Project\" />
 		<Folder Include="Views\Home\Partials\" />
 		<Folder Include="Views\Home\Portfolio\" />
-	</ItemGroup>
-
-	<ItemGroup>
-		<SonarQubeSetting Include="sonar.coverage.exclusions">
-			<Value>**/Migrations/*</Value>
-		</SonarQubeSetting>
 	</ItemGroup>
 
 </Project>
