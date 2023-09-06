@@ -9,6 +9,7 @@
     <link rel="stylesheet" href="~/css/all.min.css" asp-append-version="true" />
     <meta name="keywords" content="Miguel Oliveira, desenvolvedor, programador, front-end, back-end, fullstack, developer">
     <meta name="robots" content="index, follow, max-image-preview:large">
+    <meta name="description" content="@Model.About?.Description">
     <meta property="og:title" content="Miguel Oliveira - @Model.About?.Title">
     <meta property="og:description" content="@Model.About?.Description">
     <meta property="og:site_name" content="Miguel Oliveira - @Model.About?.Title">
@@ -37,7 +38,7 @@
         <div class="d-flex flex-column">
 
             <div class="profile">
-                <img src="/img/profile-img.jpg" alt="" class="img-fluid rounded-circle">
+                <img src="/img/me.webp" alt="" class="img-fluid rounded-circle">
                 <h1 class="text-light">Miguel Oliveira</h1>
                 <partial name="/Views/Home/Components/SocialLinks.cshtml" model="@Model.SocialNetworks" />
            </div>
