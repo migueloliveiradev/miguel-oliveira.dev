@@ -11,13 +11,13 @@ public class ImagemService : IImageService
     {
         this.storageService = storageService;
     }
-    public async Task UploadImage(Stream file, string contentType, string file_id)
+    public async Task UploadImage(Stream file, string contentType, string file_name_id, int file_id)
     {
-        string file_name = $"{file_id}{contentType.Replace("image/", ".")}";
+        string file_name = $"{file_name_id}{contentType.Replace("image/", ".")}";
         MemoryStream memoryStream = new();
         await file.CopyToAsync(memoryStream);
-        BackgroundJob.Enqueue<IImageConverter>(x => x.ConverterToWebp(memoryStream.ToArray(), contentType, $"{file_id}.webp"));
         await storageService.UploadImage(file, contentType, file_name);
+        BackgroundJob.Enqueue<IImageConverter>(x => x.ConverterToWebp(file_id, file_name_id));
     }
     public async Task DeleteImage(string name)
     {

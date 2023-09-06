@@ -2,5 +2,5 @@
 
 public interface IImageConverter
 {
-    Task ConverterToWebp(byte[] file, string contentType, string file_name);
+    Task ConverterToWebp(int file_id, string file_name);
 }

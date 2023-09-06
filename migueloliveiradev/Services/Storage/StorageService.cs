@@ -2,6 +2,7 @@
 using Oci.Common.Auth;
 using Oci.ObjectstorageService;
 using Oci.ObjectstorageService.Requests;
+using Oci.ObjectstorageService.Responses;
 using Org.BouncyCastle.Crypto.Parameters;
 using Org.BouncyCastle.OpenSsl;
 
@@ -35,8 +36,10 @@ public class StorageService : IStorageService
         return UploadImageLocal(file, file_name);
     }
 
-    private Task UploadImageCloud(Stream file, string contentType, string file_name)
+    private async Task UploadImageCloud(Stream file, string contentType, string file_name)
     {
+        file.Position = 0;
+        file.Seek(0, SeekOrigin.Begin);
         PutObjectRequest putObjectRequest = new()
         {
             BucketName = Environment.GetEnvironmentVariable("BUCKET_NAME"),
@@ -45,7 +48,8 @@ public class StorageService : IStorageService
             PutObjectBody = file,
             ContentType = contentType
         };
-        return osClient.PutObject(putObjectRequest);
+         await osClient.PutObject(putObjectRequest);
+        return;
     }
 
     private async Task UploadImageLocal(Stream file, string file_name)
@@ -85,6 +89,33 @@ public class StorageService : IStorageService
             File.Delete(path);
         }
         return Task.CompletedTask;
+    }
+
+    public Task<Stream> GetImage(string name)
+    {
+        if (isDevelopment)
+        {
+            return GetImageLocal(name);
+        }
+        return GetImageCloud(name);
+    }
+
+    private async Task<Stream> GetImageCloud(string name)
+    {
+        GetObjectRequest getObjectRequest = new()
+        {
+            BucketName = Environment.GetEnvironmentVariable("BUCKET_NAME"),
+            NamespaceName = Environment.GetEnvironmentVariable("NAMESPACE_NAME"),
+            ObjectName = $"projects/{name}"
+        };
+        GetObjectResponse Object = await osClient.GetObject(getObjectRequest);
+        return Object.InputStream;
+    }
+
+    private async Task<Stream> GetImageLocal(string name)
+    {
+        string path = Path.Combine(Environment.GetEnvironmentVariable("WEB_ROOT_PATH")!, "img", "projects", name);
+        return await Task.FromResult(new FileStream(path, FileMode.Open));
     }
 }
 
