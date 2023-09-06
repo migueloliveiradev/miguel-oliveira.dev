@@ -18,10 +18,7 @@
                     </div>
                     <div class="mb-3">
                         <label class="form-label">Tipo da imagem</label>
-                        <select class="form-control" asp-for="TypeIcon">
-                            <option value="FontAwesome">Font Awesome</option>
-                            <option value="Svg">Svg</option>
-                        </select>
+                        <select class="form-control" asp-for="TypeIcon" asp-items="Html.GetEnumSelectList<TypeIcon>()"></select>
                     </div>
                     <div class="mb-3">
                         <label class="form-label">Class Icon</label>
