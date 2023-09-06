@@ -118,7 +118,7 @@ public class ProjectsRepository : IProjectsRepository
             ProjectId = id,
             TechnologyId = id_technology
         };
-        
+
         context.ProjectTechnologies.Add(projectTechnology);
         context.SaveChanges();
     }

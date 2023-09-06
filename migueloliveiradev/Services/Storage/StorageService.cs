@@ -48,7 +48,7 @@ public class StorageService : IStorageService
             PutObjectBody = file,
             ContentType = contentType
         };
-         await osClient.PutObject(putObjectRequest);
+        await osClient.PutObject(putObjectRequest);
         return;
     }
 
