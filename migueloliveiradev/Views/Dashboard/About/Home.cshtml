@@ -14,11 +14,19 @@
             <input type="hidden" asp-for="Id" />
             <div class="mb-3">
                 <label class="form-label">Titulo</label>
-                <input class="form-control" asp-for="Title" placeholder="Escreva um titulo aqui." id="floatingTextarea1" />
+                <input class="form-control" asp-for="Title" placeholder="Escreva o titulo aqui." />
             </div>
             <div class="mb-3">
                 <label class="form-label">Descrição</label>
-                <textarea class="form-control" asp-for="Description" placeholder="Escreva uma descrição aqui." id="floatingTextarea2" style="height: 100px"></textarea>
+                <textarea class="form-control" asp-for="Description" placeholder="Escreva uma descrição aqui." style="height: 100px"></textarea>
+            </div>
+            <div class="mb-3">
+                <label class="form-label">Telefone Whatsapp contato</label>
+                <input class="form-control" asp-for="NumberWhatsapp" placeholder="Escreva um numero de telefone aqui."/>
+            </div>
+            <div class="mb3">
+                <label class="form-label">Text para contato Whatsapp</label>
+                <input class="form-control" asp-for="TextMessageWhatsapp" placeholder="Escreva uma mensagem aqui."/>
             </div>
             <div class="ms-auto">
                 <button type="submit" class="btn btn-primary mt-2">Salvar</button>

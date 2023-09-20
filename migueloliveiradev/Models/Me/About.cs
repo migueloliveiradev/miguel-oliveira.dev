@@ -6,4 +6,6 @@ public class About
     public string Title { get; set; }
     public string Description { get; set; }
 
+    public long NumberWhatsapp { get; set; }
+    public string TextMessageWhatsapp { get; set; }
 }

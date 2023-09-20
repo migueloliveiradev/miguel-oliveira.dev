@@ -1,0 +1,27 @@
+﻿@using migueloliveiradev.Models.Me;
+@model About
+<a target="_blank" href="https://api.whatsapp.com/send?phone=@Model?.NumberWhatsapp&text=@Model?.TextMessageWhatsapp"
+    class="btn-whatsapp" 
+    data-bs-toggle="tooltip"
+    data-bs-placement="bottom"
+    data-bs-title="Entre em contato diretamente comigo!">
+    <i class="fa-brands fa-whatsapp fa-2xl" style="color: #ffffff;"></i>
+</a>
+
+<style>
+    .btn-whatsapp {
+        display: flex;
+        position: fixed;
+        background: #25d366;
+        bottom: 25px;
+        border-radius: 50%;
+        width: 4rem;
+        height: 4rem;
+        box-shadow: 2px 2px 12px rgba(22,124,60,.2);
+        transition: .4s;
+        align-items: center;
+        justify-content: center;
+        right: 25px;
+        z-index: 9999;
+    }
+</style>

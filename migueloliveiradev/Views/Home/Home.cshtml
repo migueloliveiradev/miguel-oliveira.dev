@@ -3,10 +3,12 @@
 @{
     ViewData["Title"] = "Home Page";
 }
-<partial name="Components/Inicio.cshtml" />
+<partial name="Components/Inicio.cshtml" model="@Model.About" />
 
 <partial name="Components/About.cshtml" model="@Model.About" />
 
 <partial name="Components/Technologies.cshtml" model="@Model.Technologies" />
 
 <partial name="Components/Projects.cshtml" model="@Model.Projects" />
+
+<partial name="Components/Whatsapp.cshtml" model="@Model.About"/>

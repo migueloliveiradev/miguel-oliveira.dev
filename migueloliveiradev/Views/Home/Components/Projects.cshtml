@@ -93,10 +93,10 @@
                     <div class="d-flex">
                         @foreach(Technology tech in project.Technologies)
                         {
-                            <span data-bs-toggle="tooltip" data-bs-placement="top" data-bs-title="Disabled tooltip">
+                            <span data-bs-toggle="tooltip" data-bs-placement="top" data-bs-title="@tech.Nome">
                                 @if (tech.TypeIcon == TypeIcon.FontAwesome)
                                 {
-                                    <i class="@tech.Icon fa-2xl me-3" ></i>
+                                    <i class="@tech.Icon fa-2xl me-3 p-0" ></i>
                                 }
                                 else
                                 {
