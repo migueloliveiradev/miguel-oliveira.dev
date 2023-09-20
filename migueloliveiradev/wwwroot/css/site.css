@@ -1,5 +1,4 @@
-.carousel-images-project
-{
+.carousel-images-project {
     width: 70%;
     height: 70%;
     object-fit: cover;
@@ -15,6 +14,7 @@
     grid-gap: 1rem;
     grid-template-columns: repeat(auto-fit, minmax(400px, 1fr));
 }
+
     .cards-projects .card {
         width: 400px;
         margin: 10px;
@@ -152,7 +152,8 @@ h6 {
 .main-home {
     margin-left: 300px;
 }
-.container{
+
+.container {
     margin-right: 0 !important;
     margin-left: 0 !important;
     max-width: 100% !important;
@@ -292,13 +293,6 @@ h6 {
         font-family: "Poppins", sans-serif;
     }
 
-        #hero p span {
-            color: #fff;
-            padding-bottom: 4px;
-            letter-spacing: 1px;
-            border-bottom: 3px solid #149ddd;
-        }
-
 @media (min-width: 1024px) {
     #hero {
         background-attachment: fixed;
@@ -330,29 +324,29 @@ section {
     background: #f5f8fd;
 }
 
-    .section-title h2 {
-        font-size: 32px;
-        font-weight: bold;
-        margin-bottom: 20px;
-        padding-bottom: 20px;
-        position: relative;
-        color: #173b6c;
+.section-title h2 {
+    font-size: 32px;
+    font-weight: bold;
+    margin-bottom: 20px;
+    padding-bottom: 20px;
+    position: relative;
+    color: #173b6c;
+}
+
+    .section-title h2::after {
+        content: "";
+        position: absolute;
+        display: block;
+        width: 50px;
+        height: 3px;
+        background: #149ddd;
+        bottom: 0;
+        left: 0;
     }
 
-        .section-title h2::after {
-            content: "";
-            position: absolute;
-            display: block;
-            width: 50px;
-            height: 3px;
-            background: #149ddd;
-            bottom: 0;
-            left: 0;
-        }
-
-    .section-title p {
-        margin-bottom: 0;
-    }
+.section-title p {
+    margin-bottom: 0;
+}
 
 /*--------------------------------------------------------------
 # About

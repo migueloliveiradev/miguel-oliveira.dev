@@ -18,14 +18,11 @@ public static class MinifyFiles
                 "/css/dashboard/login.css",
                 "/css/dashboard/cards.css");
 
-            pipeline.AddJavaScriptBundle("/js/all.bundle.min.js",
-                new CodeSettings() { MinifyCode = true, PreserveImportantComments = false, IgnoreAllErrors = true },
-                "/lib/bootstrap/js/bootstrap.bundle.min.js");
-
             pipeline.AddJavaScriptBundle("/js/all.min.js",
                 new CodeSettings() { MinifyCode = true, PreserveImportantComments = false, IgnoreAllErrors = true },
-                "/lib/bootstrap/js/bootstrap.js");
-
+                "/lib/popper.js/umd/popper.js",
+                "/lib/bootstrap/js/bootstrap.js",
+                "/js/site.js");
         });
         return services;
     }
