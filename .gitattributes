@@ -1,2 +1,2 @@
 # Razor Views
-*.cshtml linguist-language=Razor
+*.cshtml linguist-language=HTML+Razor
